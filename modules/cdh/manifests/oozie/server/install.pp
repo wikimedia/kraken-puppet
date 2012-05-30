@@ -16,5 +16,6 @@
 class cdh::oozie::server::install inherits cdh::oozie::server::params {
   package { $package_names:
     ensure => latest,
+	require => Class["cdh::repository"],
   }
 }

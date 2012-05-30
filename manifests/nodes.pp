@@ -4,5 +4,5 @@
 node /^analytics\d+/ {
 	include misc_production
 	
-	include analytics
+	class { "analytics": require => Class["misc_production"] }
 }

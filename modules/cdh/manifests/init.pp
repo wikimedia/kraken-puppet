@@ -14,10 +14,12 @@
 #
 
 class cdh {
-  include hadoop
-  include hbase
-  include hive
-  include zookeeper
-  include pig
-  include oozie
+	include repository
+
+	include hadoop
+	include hbase
+	include hive
+	include zookeeper
+	include pig
+	include oozie
 }

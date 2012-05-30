@@ -15,7 +15,7 @@
 
 class cdh::hadoop::params {
   $package_names = [ "hadoop-0.20",
-                     "hadoop-lzo",
+                     # "hadoop-lzo",    # TODO: This is not in cloudera repo?
                      "hadoop-0.20-sbin",
                      "hadoop-0.20-native" ]
 }
