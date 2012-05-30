@@ -2,7 +2,7 @@
 
 
 node /^analytics\d+/ {
-	include misc_production
+	include analytics_temp
 	
 	class { "analytics": require => Class["misc_production"] }
 }
