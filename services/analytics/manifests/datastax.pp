@@ -1,4 +1,4 @@
-# Class: analytics::dse
+# Class: analytics::datastax
 #
 # Sets up Datastax Enterprise for Wikimedia Analytics Cluster
 class analytics::datastax {
