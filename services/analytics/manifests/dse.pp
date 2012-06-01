@@ -1,4 +1,14 @@
-class dse::repository {
+# Class: analytics::dse
+#
+# Sets up Datastax Enterprise for Wikimedia Analytics Cluster
+class analytics::dse {
+	# install DSE packages
+	include analytics::dse::apt_source
+	class { "dse": require => Class["analytics::dse::apt_source"] }
+}
+
+class analytics::dse::apt_source {
+	# TODO: change these when we go into production.
 	$username = "otto_wikimedia.org"
 	$password = "LwVPlBpUYzQJLXa"
 	

@@ -2,6 +2,6 @@
 #
 #
 class analytics::base {
-	include cdh
-	include dse
+	include analytics::cdh
+	include analytics::dse
 }
