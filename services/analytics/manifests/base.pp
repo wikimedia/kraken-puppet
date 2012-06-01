@@ -3,4 +3,5 @@
 #
 class analytics::base {
 	include cdh
+	include dse
 }
