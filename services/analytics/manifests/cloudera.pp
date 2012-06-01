@@ -8,7 +8,7 @@ class analytics::cloudera {
 	class { "cdh": require => Class["analytics::cloudera::apt_source"] }
 }
 
-class analytics::cloudera::apt_source {
+class analytics::cloudera::apt_source($version = 'cdh3') {
 	file { "/etc/apt/sources.list.d/cloudera.list":
 		content => "deb http://archive.cloudera.com/debian ${lsbdistcodename}-${version} contrib\ndeb-src http://archive.cloudera.com/debian ${lsbdistcodename}-${version} contrib\n",
 		mode    => 0444,
