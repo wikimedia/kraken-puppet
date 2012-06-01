@@ -14,8 +14,6 @@
 #
 
 class cdh {
-	include repository
-
 	include hadoop
 	include hbase
 	include hive
