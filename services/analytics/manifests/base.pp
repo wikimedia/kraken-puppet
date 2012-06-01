@@ -2,6 +2,6 @@
 #
 #
 class analytics::base {
-	include analytics::cdh
-	include analytics::dse
+	include analytics::cloudera
+	include analytics::datastax
 }
