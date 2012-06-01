@@ -10,8 +10,6 @@ class dse {
 #
 #
 class dse::packages {
-	require repository
-	
 	package { ["dse-full", "opscenter", "libjna-java"]:
 		ensure => "installed",
 	}
