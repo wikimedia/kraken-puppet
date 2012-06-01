@@ -16,6 +16,5 @@
 class cdh::pig::install inherits cdh::pig::params {
   package { $package_names:
     ensure => latest,
-	require => Class["cdh::repository"],
   }
 }
