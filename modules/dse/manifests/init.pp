@@ -2,7 +2,7 @@
 #
 #
 class dse {
-	include packages
+	include dse::packages
 }
 
 
