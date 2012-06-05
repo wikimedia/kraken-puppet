@@ -34,6 +34,24 @@ class analytics::cloudera::hadoop {
 }
 
 
+class analytics::cloudera::master {
+	require analytics::cloudera
+
+	include 
+		cdh::hadoop::service::namenode,
+		cdh::hadoop::service::jobtracker
+}
+
+class analytics::cloudera::slave {
+	require analytics::cloudera
+
+	include 
+		cdh::hadoop::service::datanode,
+		cdh::hadoop::service::tasktracker
+}
+
+
+
 class analytics::cloudera::apt_source($version = 'cdh3') {
 	file { "/etc/apt/sources.list.d/cloudera.list":
 		content => "deb http://archive.cloudera.com/debian ${lsbdistcodename}-${version} contrib\ndeb-src http://archive.cloudera.com/debian ${lsbdistcodename}-${version} contrib\n",
