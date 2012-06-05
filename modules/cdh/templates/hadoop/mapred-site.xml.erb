@@ -7,7 +7,7 @@
 <configuration>
   <property>
     <name>mapred.job.tracker</name>
-    <value><%= namenode_hostname %>:<%= namenode_port %></value>
+    <value><%= namenode_hostname %>:<%= namenode_port.to_i + 1 %></value>
   </property>
   <property>
     <name>mapred.local.dir</name>
