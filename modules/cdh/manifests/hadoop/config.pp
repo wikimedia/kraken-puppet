@@ -11,11 +11,11 @@ class cdh::hadoop::config(
 	require cdh::hadoop
 	
 	file { "$config_directory/hdfs-site.xml.erb":
-		content => template("hdfs-site.xml.erb")
+		content => template("cdh/hadoop/hdfs-site.xml.erb")
 	}
 
 	file { "$config_directory/mapred-site.xml.erb":
-		content => template("mapred-site.xml.erb")
+		content => template("cdh/hadoop/mapred-site.xml.erb")
 	}
 }
 
