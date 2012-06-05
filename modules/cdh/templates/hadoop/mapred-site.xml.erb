@@ -1,5 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
 <% mapred_directories = data_directories.collect { |data_dir| data_dir + '/mapred/local' } -%>
-<property>
- <name>mapred.local.dir</name>
- <value>mapred_directories.join(',')</value>
-</property>
+<configuration>
+  <property>
+    <name>mapred.job.tracker</name>
+    <value><%= namenode_hostname %>:<%= namenode_port %></value>
+  </property>
+  <property>
+    <name>mapred.local.dir</name>
+    <value><%= mapred_directories.join(',') %></value>
+  </property>
+</configuration>
+  

@@ -14,13 +14,15 @@ class analytics::cloudera {
 #
 # TODO: puppetize the directory creation
 class analytics::cloudera::hadoop {
+	$namenode_hostname     = "analytics1001.wikimedia.org"
 	$hadoop_name_directory = "/var/lib/hadoop-0.20/name"
 	$hadoop_data_directory = "/var/lib/hadoop-0.20/data"
 	$hadoop_mapred_path    = "mapred/local"
-	
+
 	class { "cdh::hadoop::config":
-		name_directories => [$hadoop_name_directory],
-		data_directories => [
+		namenode_hostname => $namenode_hostname,
+		name_directories  => [$hadoop_name_directory],
+		data_directories  => [
 			"$hadoop_data_directory/data_e",
 			"$hadoop_data_directory/data_f",
 			"$hadoop_data_directory/data_g",
