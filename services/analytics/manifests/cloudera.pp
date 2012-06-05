@@ -6,7 +6,31 @@ class analytics::cloudera {
 	include analytics::cloudera::apt_source	
 	# include dse class from dse module.  This installs DSE packages
 	class { "cdh": require => Class["analytics::cloudera::apt_source"] }
+	
+	include analytics::cloudera::hadoop
 }
+
+# Class: analytics::cloudera::hadoop
+#
+# TODO: puppetize the directory creation
+class analytics::cloudera::hadoop {
+	$hadoop_name_directory = "/var/lib/hadoop-0.20/name"
+	$hadoop_data_directory = "/var/lib/hadoop-0.20/data"
+	$hadoop_mapred_path    = "mapred/local"
+	
+	class { "cdh::hadoop::config":
+		name_directories => [$hadoop_name_directory],
+		data_directories => [
+			"$hadoop_data_directory/data_e",
+			"$hadoop_data_directory/data_f",
+			"$hadoop_data_directory/data_g",
+			"$hadoop_data_directory/data_h",
+			"$hadoop_data_directory/data_i",
+			"$hadoop_data_directory/data_j"
+		]
+	}
+}
+
 
 class analytics::cloudera::apt_source($version = 'cdh3') {
 	file { "/etc/apt/sources.list.d/cloudera.list":

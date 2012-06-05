@@ -1,0 +1,5 @@
+<% mapred_directories = data_directories.collect { |data_dir| data_dir + '/mapred/local' } -%>
+<property>
+ <name>mapred.local.dir</name>
+ <value>mapred_directories.join(',')</value>
+</property>
