@@ -22,8 +22,8 @@ class analytics::cloudera::hadoop {
 
 	class { "cdh::hadoop::config":
 		namenode_hostname => $namenode_hostname,
-		dfs_name_directories  => [$hadoop_name_directory],
-		dfs_data_directories  => [
+		dfs_name_dir  => [$hadoop_name_directory],
+		dfs_data_dir  => [
 			"$hadoop_data_directory/e/$hadoop_hdfs_data_path",
 			"$hadoop_data_directory/f/$hadoop_hdfs_data_path",
 			"$hadoop_data_directory/g/$hadoop_hdfs_data_path",
@@ -31,7 +31,7 @@ class analytics::cloudera::hadoop {
 			"$hadoop_data_directory/i/$hadoop_hdfs_data_path",
 			"$hadoop_data_directory/j/$hadoop_hdfs_data_path",
 		],
-		mapred_local_directories  => [
+		mapred_local_dir  => [
 			"$hadoop_data_directory/e/$hadoop_mapred_path",
 			"$hadoop_data_directory/f/$hadoop_mapred_path",
 			"$hadoop_data_directory/g/$hadoop_mapred_path",
