@@ -32,12 +32,12 @@ class analytics::cloudera::hadoop {
 			"$hadoop_data_directory/j/$hadoop_hdfs_data_path",
 		],
 		mapred_local_dir  => [
-			"$hadoop_data_directory/e/$hadoop_mapred_path",
-			"$hadoop_data_directory/f/$hadoop_mapred_path",
-			"$hadoop_data_directory/g/$hadoop_mapred_path",
-			"$hadoop_data_directory/h/$hadoop_mapred_path",
-			"$hadoop_data_directory/i/$hadoop_mapred_path",
-			"$hadoop_data_directory/j/$hadoop_mapred_path",
+			"$hadoop_data_directory/e/$hadoop_mapred_local_path",
+			"$hadoop_data_directory/f/$hadoop_mapred_local_path",
+			"$hadoop_data_directory/g/$hadoop_mapred_local_path",
+			"$hadoop_data_directory/h/$hadoop_mapred_local_path",
+			"$hadoop_data_directory/i/$hadoop_mapred_local_path",
+			"$hadoop_data_directory/j/$hadoop_mapred_local_path",
 		],
 	}
 }
