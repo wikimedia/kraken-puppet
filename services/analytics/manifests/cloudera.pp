@@ -14,22 +14,31 @@ class analytics::cloudera {
 #
 # TODO: puppetize the directory creation
 class analytics::cloudera::hadoop {
-	$namenode_hostname     = "analytics1001.wikimedia.org"
-	$hadoop_name_directory = "/var/lib/hadoop-0.20/name"
-	$hadoop_data_directory = "/var/lib/hadoop-0.20/data"
-	$hadoop_mapred_path    = "mapred/local"
+	$namenode_hostname        = "analytics1001.wikimedia.org"
+	$hadoop_name_directory    = "/var/lib/hadoop-0.20/name"
+	$hadoop_data_directory    = "/var/lib/hadoop-0.20/data"
+	$hadoop_hdfs_data_path    = "hdfs/dn"
+	$hadoop_mapred_local_path = "mapred/local"
 
 	class { "cdh::hadoop::config":
 		namenode_hostname => $namenode_hostname,
-		name_directories  => [$hadoop_name_directory],
-		data_directories  => [
-			"$hadoop_data_directory/data_e",
-			"$hadoop_data_directory/data_f",
-			"$hadoop_data_directory/data_g",
-			"$hadoop_data_directory/data_h",
-			"$hadoop_data_directory/data_i",
-			"$hadoop_data_directory/data_j"
-		]
+		dfs_name_directories  => [$hadoop_name_directory],
+		dfs_data_directories  => [
+			"$hadoop_data_directory/e/$hadoop_hdfs_data_path",
+			"$hadoop_data_directory/f/$hadoop_hdfs_data_path",
+			"$hadoop_data_directory/g/$hadoop_hdfs_data_path",
+			"$hadoop_data_directory/h/$hadoop_hdfs_data_path",
+			"$hadoop_data_directory/i/$hadoop_hdfs_data_path",
+			"$hadoop_data_directory/j/$hadoop_hdfs_data_path",
+		],
+		mapred_local_directories  => [
+			"$hadoop_data_directory/e/$hadoop_mapred_path",
+			"$hadoop_data_directory/f/$hadoop_mapred_path",
+			"$hadoop_data_directory/g/$hadoop_mapred_path",
+			"$hadoop_data_directory/h/$hadoop_mapred_path",
+			"$hadoop_data_directory/i/$hadoop_mapred_path",
+			"$hadoop_data_directory/j/$hadoop_mapred_path",
+		],
 	}
 }
 

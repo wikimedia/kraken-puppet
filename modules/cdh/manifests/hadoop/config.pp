@@ -4,8 +4,9 @@
 # This assumes that the mapred_directories
 # should be inside of the data_directories.
 class cdh::hadoop::config(
-	$name_directories,
-	$data_directories,
+	$dfs_name_dir,
+	$dfs_data_dir,
+	$mapred_local_dir,
 	$namenode_hostname,
 	$namenode_port = '8020',
 	$config_directory   = '/etc/hadoop/conf') {

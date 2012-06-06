@@ -6,10 +6,10 @@
 <configuration>
   <property>
    <name>dfs.name.dir</name>
-   <value><%= (name_directories.class == Array) ? name_directories.join(',') : name_directories %></value>
+   <value><%= (dfs_name_dir.class == Array) ? dfs_name_dir.join(',') : dfs_name_dir %></value>
   </property>
   <property>
    <name>dfs.data.dir</name>
-   <value><%= (data_directories.class == Array) ? data_directories.join(',') : data_directories %></value>
+   <value><%= (dfs_data_dir.class == Array) ? dfs_data_dir.join(',') : dfs_data_dir %></value>
   </property>
 </configuration>

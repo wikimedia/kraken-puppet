@@ -3,7 +3,6 @@
 
 <!-- Put site-specific property overrides in this file. -->
 
-<% mapred_directories = data_directories.collect { |data_dir| data_dir + '/mapred/local' } -%>
 <configuration>
   <property>
     <name>mapred.job.tracker</name>
@@ -11,7 +10,7 @@
   </property>
   <property>
     <name>mapred.local.dir</name>
-    <value><%= mapred_directories.join(',') %></value>
+    <value><%= mapred_local_dir.join(',') %></value>
   </property>
   <property>
     <name>mapred.system.dir</name>
