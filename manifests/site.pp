@@ -15,8 +15,8 @@ class analytics_temp {
 		returns => [ 0, 100 ],
 	}
 
-	package { "curl": ensure => "installed" }
-	
+	package { ["curl", "dstat"]: ensure => "installed" }
+
 	file { "/etc/profile.d/analytics.sh":
 		content => 'export http_proxy="http://brewster.wikimedia.org:8080"
 
