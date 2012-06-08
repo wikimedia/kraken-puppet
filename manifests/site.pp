@@ -20,7 +20,7 @@ class analytics_temp {
 	file { "/etc/profile.d/analytics.sh":
 		content => 'export http_proxy="http://brewster.wikimedia.org:8080"
 
-alias pupup="cd /etc/puppet.analytics && sudo git pull"
+alias pupup="pushd .; cd /etc/puppet.analytics && sudo git pull; popd"
 alias puptest="sudo puppetd --test --verbose --server analytics1001.wikimedia.org --vardir /var/lib/puppet.analytics --ssldir /var/lib/puppet.analytics/ssl --confdir=/etc/puppet.analytics"
 alias pupsign="sudo puppetca --vardir /var/lib/puppet.analytics --ssldir /var/lib/puppet.analytics/ssl --confdir=/etc/puppet.analytics sign "',
 		mode => 755,
