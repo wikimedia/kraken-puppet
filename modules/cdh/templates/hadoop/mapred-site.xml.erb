@@ -8,21 +8,36 @@
     <name>mapred.job.tracker</name>
     <value><%= namenode_hostname %>:<%= namenode_port.to_i + 1 %></value>
   </property>
+
+  <% # Hacky way to ensure this is not set on namenode/jobtracker.  TODO: make this better later. %>
+  <% if hostname != 'analytics1001' -%>
   <property>
     <name>mapred.local.dir</name>
     <value><%= mapred_local_dir.join(',') %></value>
   </property>
+  <% end -%>
   <property>
     <name>mapred.system.dir</name>
     <value>/mapred/system</value>
   </property>
+
   <property>
     <name>mapred.map.tasks</name>
-    <value>16</value>
+    <value><%= map_tasks %></value>
   </property>
   <property>
     <name>mapred.reduce.tasks</name>
-    <value>16</value>
+    <value><%= reduce_tasks %></value>
   </property>
+
+  <property>
+    <name>mapred.tasktracker.map.tasks.maximum</name>
+    <value><%= tasktracker_map_tasks_maximum %></value>
+  </property>
+  <property>
+    <name>mapred.tasktracker.reduce.tasks.maximum</name>
+    <value><%= tasktracker_reduce_tasks_maximum %></value>
+  </property>
+
 </configuration>
   
