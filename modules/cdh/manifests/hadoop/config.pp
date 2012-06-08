@@ -11,8 +11,9 @@ class cdh::hadoop::config(
 	$namenode_port                    = '8020',
 	$config_directory                 = '/etc/hadoop/conf',
 	$tasktracker_map_tasks_maximum    = 16,
-	$tasktracker_reduce_tasks_maximum = 16,
-	$tasktracker_node_count = 9
+	$tasktracker_reduce_tasks_maximum = 8,
+	$tasktracker_node_count           = 9,
+	$dfs_block_size                   = 134217728 # 67108864 # 64MB default
 	) {
 	
 	require cdh::hadoop
