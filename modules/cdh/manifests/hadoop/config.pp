@@ -12,8 +12,8 @@ class cdh::hadoop::config(
 	$config_directory                 = '/etc/hadoop/conf',
 	$map_tasks                        = 144,
 	$reduce_tasks                     = 72,
-	$tasktracker_map_tasks_maximum    = 16,
-	$tasktracker_reduce_tasks_maximum = 8
+	$tasktracker_map_tasks_maximum    = 17,
+	$tasktracker_reduce_tasks_maximum = 7
 	) {
 	
 	require cdh::hadoop
