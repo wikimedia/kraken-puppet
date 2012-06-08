@@ -10,10 +10,9 @@ class cdh::hadoop::config(
 	$namenode_hostname,
 	$namenode_port                    = '8020',
 	$config_directory                 = '/etc/hadoop/conf',
-	$map_tasks                        = 144,
-	$reduce_tasks                     = 72,
 	$tasktracker_map_tasks_maximum    = 17,
-	$tasktracker_reduce_tasks_maximum = 7
+	$tasktracker_reduce_tasks_maximum = 7,
+	$tasktracker_node_count = 9
 	) {
 	
 	require cdh::hadoop

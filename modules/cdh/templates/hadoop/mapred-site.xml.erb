@@ -22,21 +22,21 @@
   </property>
 
   <property>
-    <name>mapred.map.tasks</name>
-    <value><%= map_tasks %></value>
-  </property>
-  <property>
-    <name>mapred.reduce.tasks</name>
-    <value><%= reduce_tasks %></value>
-  </property>
-
-  <property>
     <name>mapred.tasktracker.map.tasks.maximum</name>
     <value><%= tasktracker_map_tasks_maximum %></value>
   </property>
   <property>
     <name>mapred.tasktracker.reduce.tasks.maximum</name>
     <value><%= tasktracker_reduce_tasks_maximum %></value>
+  </property>
+
+  <property>
+    <name>mapred.map.tasks</name>
+    <value><%= tasktracker_map_tasks_maximum * tasktracker_node_count %></value>
+  </property>
+  <property>
+    <name>mapred.reduce.tasks</name>
+    <value><%= tasktracker_reduce_tasks_maximum * tasktracker_node_count %></value>
   </property>
 
 </configuration>
