@@ -94,6 +94,6 @@ define unixaccount($username, $uid, $gid = 500, $enabled="true") {
 				},
 		managehome	=> true,
 		allowdupe	=> false,
-		require		=> Group[$gid],
+		# require		=> Group[$gid],
 	}
 }
