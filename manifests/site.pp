@@ -36,7 +36,7 @@ class declerambaul inherits baseaccount {
 	$realname = "Fabian Kaelin"
 	$uid = 566
 
-	unixaccount { $realname: username => $username, uid => $uid, gid => $gid }
+	unixaccount { $realname: username => $username, uid => $uid }
 
             if $manage_home {
                     Ssh_authorized_key { require => Unixaccount[$realname]}
@@ -73,7 +73,7 @@ define account_ssh_key($user, $type, $key, $enabled="true") {
 }
 
 
-define unixaccount($username, $uid, $gid, $enabled="true") {
+define unixaccount($username, $uid, $gid = 500, $enabled="true") {
 
 
 	if ($myshell) {
