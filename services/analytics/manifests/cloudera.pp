@@ -39,7 +39,7 @@ class analytics::cloudera::hadoop {
 			"$hadoop_data_directory/i/$hadoop_mapred_local_path",
 			"$hadoop_data_directory/j/$hadoop_mapred_local_path",
 		],
-		# dfs_block_size => "134217728",   # 128MB for testing
+		dfs_block_size => "134217728",   # 128MB for testing
 		# tasktracker_map_tasks_maximum    => 17,
 		# tasktracker_reduce_tasks_maximum => 7,
 	}
