@@ -1,10 +1,5 @@
 import "nodes.pp"
 
-
-# analytics nodes don't have access to internet.  
-# set this proxy as default for testing.
-Exec { environment => 'http_proxy=http://brewster.wikimedia.org:8080' }
-
 # this class does things that ops production
 # usually does, or that we will not need
 # in production when we are finished with testing.
