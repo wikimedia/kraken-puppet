@@ -33,4 +33,3 @@ class cdh::hadoop::config(
 		content => template("cdh/hadoop/mapred-site.xml.erb")
 	}
 }
-
