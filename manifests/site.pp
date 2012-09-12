@@ -48,15 +48,13 @@ class olivneh inherits baseaccount {
 	$realname = "Ori Livneh"
 	$uid = 604
 	unixaccount { $realname: username => $username, uid => $uid, gid => $gid }
-	if $manage_home {
-		Ssh_authorized_key { require => Unixaccount[$realname] }
-		ssh_authorized_key {
-			"Olivneh@WMF":
-				ensure	=> present,
-				user	=> $username,
-				type	=> "ssh-rsa",
-				key	=> "AAAAB3NzaC1yc2EAAAADAQABAAABAQC5sz9Sq9+vAas4hY9HdVV0/xukFFRJj0NMDuWY4cRf/MKXkGwQB2CVEa6/owW3G1dbC3t5viimS347DoQh9SHy9ltpnrjga5sd/8RLV/7FSs2QjG+WtMwEupAfO1YRUzWEYCbs/sYJ/dYjY6hdJJfByxH8XOQHXI6hiddjqZ7XrQUq9IVYb6rm/Td7OmwD5/T2l1YXVa/w4DHqVMEnXxtSo4Njww2BwmEYPIa9HusE8TblpAs1B78ixVLCSAg7/VLXDj2mzeX75bID3To9CvxRxPbLKJpSy/yRHM8p5XJ55ZZjp+pmkdOj/kcdvqiEe2KhfdVgXS4Ywk1/R4ZGlA+9";
-		}
+	ssh_authorized_key {
+		"Olivneh@WMF":
+			ensure	=> present,
+			user	=> $username,
+			type	=> "ssh-rsa",
+			key	=> "AAAAB3NzaC1yc2EAAAADAQABAAABAQC5sz9Sq9+vAas4hY9HdVV0/xukFFRJj0NMDuWY4cRf/MKXkGwQB2CVEa6/owW3G1dbC3t5viimS347DoQh9SHy9ltpnrjga5sd/8RLV/7FSs2QjG+WtMwEupAfO1YRUzWEYCbs/sYJ/dYjY6hdJJfByxH8XOQHXI6hiddjqZ7XrQUq9IVYb6rm/Td7OmwD5/T2l1YXVa/w4DHqVMEnXxtSo4Njww2BwmEYPIa9HusE8TblpAs1B78ixVLCSAg7/VLXDj2mzeX75bID3To9CvxRxPbLKJpSy/yRHM8p5XJ55ZZjp+pmkdOj/kcdvqiEe2KhfdVgXS4Ywk1/R4ZGlA+9",
+			require => Unixaccount[$realname],
 	}
 }
 
