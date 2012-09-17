@@ -1,5 +1,10 @@
 
 class dse::cassandra::params {
+    $service_name = $::cassandra_service_name ? {
+        undef   => 'dse',
+        default => $::cassandra_service_name,
+    }
+
     $max_heap_size = $::cassandra_max_heap_size ? {
         undef   => '',
         default => $::cassandra_max_heap_size,
