@@ -63,33 +63,33 @@ class dse::cassandra::server(
     # validate_array($seeds)
     # validate_array($data_file_directories)
 
-    if(!is_integer($jmx_port)) {
-        fail('jmx_port must be a port number between 1 and 65535')
-    }
-
-    if(!is_ip_address($listen_address)) {
-        fail('listen_address must be an IP address')
-    }
-
-    if(!is_ip_address($rpc_address)) {
-        fail('rpc_address must be an IP address')
-    }
-
-    if(!is_integer($rpc_port)) {
-        fail('rpc_port must be a port number between 1 and 65535')
-    }
-
-    if(!is_integer($storage_port)) {
-        fail('storage_port must be a port number between 1 and 65535')
-    }
-
-    if(empty($seeds)) {
-        fail('seeds must not be empty')
-    }
-
-    if(empty($data_file_directories)) {
-        fail('data_file_directories must not be empty')
-    }
+    # if(!is_integer($jmx_port)) {
+    #     fail('jmx_port must be a port number between 1 and 65535')
+    # }
+    # 
+    # if(!is_ip_address($listen_address)) {
+    #     fail('listen_address must be an IP address')
+    # }
+    # 
+    # if(!is_ip_address($rpc_address)) {
+    #     fail('rpc_address must be an IP address')
+    # }
+    # 
+    # if(!is_integer($rpc_port)) {
+    #     fail('rpc_port must be a port number between 1 and 65535')
+    # }
+    # 
+    # if(!is_integer($storage_port)) {
+    #     fail('storage_port must be a port number between 1 and 65535')
+    # }
+    # 
+    # if(empty($seeds)) {
+    #     fail('seeds must not be empty')
+    # }
+    # 
+    # if(empty($data_file_directories)) {
+    #     fail('data_file_directories must not be empty')
+    # }
 
     class { "dse::cassandra::config": }
 	class { "dse::cassandra::service": require => Class['dse::cassandra::config'] }
