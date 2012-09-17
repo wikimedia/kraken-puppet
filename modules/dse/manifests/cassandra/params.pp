@@ -123,7 +123,7 @@ class dse::cassandra::params {
     }
 
     $endpoint_snitch = $::cassandra_endpoint_snitch ? {
-        undef   => 'SimpleSnitch',
+        undef   => 'com.datastax.bdp.snitch.DseDelegateSnitch',
         default => $::cassandra_endpoint_snitch,
     }
 }
