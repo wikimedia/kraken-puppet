@@ -37,8 +37,7 @@ class dse::cassandra::server(
     $snapshot_before_compaction = $dse::cassandra::params::snapshot_before_compaction,
     $auto_snapshot              = $dse::cassandra::params::auto_snapshot,
     $multithreaded_compaction   = $dse::cassandra::params::multithreaded_compaction,
-    $endpoint_snitch            = $dse::cassandra::params::endpoint_snitch,
-
+    $endpoint_snitch            = $dse::cassandra::params::endpoint_snitch
 ) inherits dse::cassandra::params {
     # Validate input parameters
     validate_absolute_path($commitlog_directory)
