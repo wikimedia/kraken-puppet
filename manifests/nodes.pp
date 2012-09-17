@@ -19,7 +19,7 @@ node /^analytics10(0[1-9]|10)/ inherits analytics_basenode {
 	}
 
 
-	$cassandra_cluster_name = "KrakenAnalytics",
+	$cassandra_cluster_name = "KrakenAnalytics"
 
 	$cassandra_seeds = [
 		"208.80.154.154",
