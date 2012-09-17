@@ -19,7 +19,7 @@ node /^analytics10(0[1-9]|10)/ inherits analytics_basenode {
 	}
 
 	# configure cassandra.
-	class { "dse::cassandra":
+	class { "dse::cassandra::server":
 		cluster_name          => $cassandra_data_file_directories,
 		data_file_directories => $cassandra_cluster_name,
 	}

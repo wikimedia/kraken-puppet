@@ -3,7 +3,7 @@
 # Note:  This was taken and modified from
 # https://github.com/smarchive/puppet-cassandra/blob/master/manifests/init.pp
 
-class dse::cassandra(
+class dse::cassandra::server(
     $package_name               = $dse::cassandra::params::package_name,
     $service_name               = $dse::cassandra::params::service_name,
     $repo_name                  = $dse::cassandra::params::repo_name,
