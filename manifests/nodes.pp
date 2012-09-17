@@ -37,7 +37,7 @@ node /^analytics10(0[1-9]|10)/ inherits analytics_basenode {
 		"/var/lib/cassandra/data/g",
 		"/var/lib/cassandra/data/h",
 		"/var/lib/cassandra/data/i",
-		"/var/lib/cassandra/data/j",
+		"/var/lib/cassandra/data/j"
 	]
 
 	# configure cassandra.

@@ -1,5 +1,5 @@
 class dse::cassandra::service {
-    service { $dse::cassandra::service_name:
+    service { $dse::cassandra::server::service_name:
         ensure     => running,
         enable     => true,
         hasstatus  => true,
