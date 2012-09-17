@@ -40,25 +40,28 @@ class dse::cassandra::server(
     $endpoint_snitch            = $dse::cassandra::params::endpoint_snitch
 ) inherits dse::cassandra::params {
     # Validate input parameters
-    validate_absolute_path($commitlog_directory)
-    validate_absolute_path($saved_caches_directory)
 
-    validate_string($cluster_name)
-    validate_string($partitioner)
-    validate_string($initial_token)
-    validate_string($endpoint_snitch)
+    # TODO:  are these only available with Puppet Enterprise???
 
-    validate_re($rpc_server_type, ['^hsha$', '^sync$', '^async$'])
-    validate_re($incremental_backups, ['^true$', '^false$'])
-    validate_re($snapshot_before_compaction, ['^true$', '^false$'])
-    validate_re($auto_snapshot, ['^true$', '^false$'])
-    validate_re($multithreaded_compaction, ['^true$', '^false$'])
-    validate_re("${concurrent_reads}", '^[0-9]+$')
-    validate_re("${concurrent_writes}", '^[0-9]+$')
-
-    validate_array($additional_jvm_opts)
-    validate_array($seeds)
-    validate_array($data_file_directories)
+    # validate_absolute_path($commitlog_directory)
+    # validate_absolute_path($saved_caches_directory)
+    # 
+    # validate_string($cluster_name)
+    # validate_string($partitioner)
+    # validate_string($initial_token)
+    # validate_string($endpoint_snitch)
+    # 
+    # validate_re($rpc_server_type, ['^hsha$', '^sync$', '^async$'])
+    # validate_re($incremental_backups, ['^true$', '^false$'])
+    # validate_re($snapshot_before_compaction, ['^true$', '^false$'])
+    # validate_re($auto_snapshot, ['^true$', '^false$'])
+    # validate_re($multithreaded_compaction, ['^true$', '^false$'])
+    # validate_re("${concurrent_reads}", '^[0-9]+$')
+    # validate_re("${concurrent_writes}", '^[0-9]+$')
+    # 
+    # validate_array($additional_jvm_opts)
+    # validate_array($seeds)
+    # validate_array($data_file_directories)
 
     if(!is_integer($jmx_port)) {
         fail('jmx_port must be a port number between 1 and 65535')
