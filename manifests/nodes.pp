@@ -19,6 +19,8 @@ node /^analytics10(0[1-9]|10)/ inherits analytics_basenode {
 	}
 
 
+	$cassandra_cluster_name = "KrakenAnalytics",
+
 	$cassandra_seeds = [
 		"208.80.154.154",
 		"10.64.21.102",
@@ -42,9 +44,9 @@ node /^analytics10(0[1-9]|10)/ inherits analytics_basenode {
 
 	# configure cassandra.
 	class { "dse::cassandra::server":
-		cluster_name          => $cassandra_data_file_directories,
+		cluster_name          => $cassandra_cluster_name,
 		seeds                 => $cassandra_seeds,
-		data_file_directories => $cassandra_cluster_name,
+		data_file_directories => $cassandra_data_file_directories,
 	}
 }
 
