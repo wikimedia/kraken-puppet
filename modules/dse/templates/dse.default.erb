@@ -8,7 +8,7 @@
 
 # enable this to start Hadoop's JobTracker and/or TaskTrackers on this machine.
 # If left disabled, this will act as a regular Cassandra node.
-HADOOP_ENABLED=<%= hadoop_enabled %>
+HADOOP_ENABLED=<%= hadoop_enabled ? '1' : '0' %>
 
 # enable this to set the replication factor for CFS.  Note that this will only
 # have an effect the first time a cluster is started with HADOOP_ENABLED=1 and
@@ -17,4 +17,4 @@ CFS_REPLICATION_FACTOR=<%= cfs_replication_factor %>
 
 # enable this to start Solr search indexing on this machine.  If left disabled,
 # this will act as a regular Cassandra node.
-SOLR_ENABLED=<%= solr_enabled %>
+SOLR_ENABLED=<%= solr_enabled ? '1' : '0' %>
