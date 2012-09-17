@@ -158,14 +158,6 @@ concurrent_writes: <%= concurrent_writes %>
 # the maximum number of secondary indexes created on a single CF.
 memtable_flush_queue_size: 4
 
-# Whether to, when doing sequential writing, fsync() at intervals in
-# order to force the operating system to flush the dirty
-# buffers. Enable this to avoid sudden dirty buffer flushing from
-# impacting read latencies. Almost always a good idea on SSD:s; not
-# necessarily on platters.
-trickle_fsync: false
-trickle_fsync_interval_in_kb: 10240
-
 # TCP port, for commands and data
 storage_port: <%= storage_port %>
 
