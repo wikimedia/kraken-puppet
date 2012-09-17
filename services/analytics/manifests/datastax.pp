@@ -6,8 +6,6 @@ class analytics::datastax {
 	include analytics::datastax::apt_source
 	# include dse class from dse module.  This installs DSE packages
 	class { "dse": require => Class["analytics::datastax::apt_source"] }
-	
-	# include Wikimedia DSE configs.
 }
 
 class analytics::datastax::apt_source {

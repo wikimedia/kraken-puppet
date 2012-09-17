@@ -1,8 +1,17 @@
 # Class: dse
 #
 #
-class dse {
+class dse(
+	$hadoop_enabled         = true,
+	$solr_enabled           = false,
+	$cfs_replication_factor = 1) {
+
 	include dse::packages
+
+	file { "/etc/default/dse":
+		content => template("dse/dse.default.erb"),
+		require => Class['dse::packages'],
+	}
 }
 
 
@@ -13,7 +22,7 @@ class dse::packages {
 	package { ["dse-full", "opscenter", "libjna-java"]:
 		ensure => "installed",
 	}
-	
+
 	# # http://www.datastax.com/docs/datastax_enterprise2.0/install_dse_packages#install-deb-pkg
 	# # says that we need to update to JNA 3.4 manually
 	# exec { "download_jna_3.4_jar":

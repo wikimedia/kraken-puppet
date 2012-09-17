@@ -14,3 +14,11 @@ Note that, in order for this module to work, you will have to ensure that:
 include dse # includes all components
 </pre>
 
+### dse::cassandra
+<pre>
+class { "dse::cassandra":
+	data_file_directories => ["/var/lib/cassandra/data/f", "/var/lib/cassandra/data/g", ...],
+	initial_token => '17014118346046923173168730371588410572',
+}
+</pre>
+
