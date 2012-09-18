@@ -8,7 +8,7 @@ node analytics_basenode {
 }
 
 # cassandra nodes
-node /^analytics10(0[2-9]|10)/ inherits analytics_basenode {
+node /^analytics10(0[1-9]|10)/ inherits analytics_basenode {
 	include analytics::datastax::apt_source
 	
 	# Make sure Datastax Enterprise is installed
