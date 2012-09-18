@@ -22,16 +22,8 @@ node /^analytics10(0[1-9]|10)/ inherits analytics_basenode {
 	$cassandra_cluster_name = "KrakenAnalytics"
 
 	$cassandra_seeds = [
-		"208.80.154.154",
-		"10.64.21.102",
-		"10.64.21.103",
-		"10.64.21.104",
-		"10.64.21.105",
-		"10.64.21.106",
-		"10.64.21.107",
-		"10.64.21.108",
-		"10.64.21.109",
-		"10.64.21.110"
+		"208.80.154.154", # an01
+		"10.64.21.106",   # an06
 	]
 
 	$cassandra_data_file_directories = [
