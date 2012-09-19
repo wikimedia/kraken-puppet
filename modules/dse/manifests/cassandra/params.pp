@@ -41,7 +41,7 @@ class dse::cassandra::params {
     }
 
     $rpc_address = $::cassandra_rpc_address ? {
-        undef   => '0.0.0.0',
+        undef   => $::ipaddress,
         default => $::cassandra_rpc_address,
     }
 
