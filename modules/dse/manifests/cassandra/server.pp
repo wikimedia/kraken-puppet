@@ -91,7 +91,7 @@ class dse::cassandra::server(
     #     fail('data_file_directories must not be empty')
     # }
 
-    class { "dse::cassandra::config": }
+    class { "dse::cassandra::config":  require => Class["dse::packages"] }
 	class { "dse::cassandra::service": require => Class['dse::cassandra::config'] }
 }
 
