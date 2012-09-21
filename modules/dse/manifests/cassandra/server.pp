@@ -92,7 +92,7 @@ class dse::cassandra::server(
     # }
 
     class { "dse::cassandra::config":  require => Class["dse::packages"] }
-	class { "dse::cassandra::service": require => Class['dse::cassandra::config'] }
+	# class { "dse::cassandra::service": require => Class['dse::cassandra::config'] }
 }
 
 
