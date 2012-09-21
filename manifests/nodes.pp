@@ -10,13 +10,9 @@ node analytics_basenode {
 # cassandra nodes
 node /^analytics10(0[2-9]|10)/ inherits analytics_basenode {
 	include analytics::datastax::apt_source
-	
-	# Make sure Datastax Enterprise is installed
-	# with Hadoop (CFS) enabled.
-	class { "dse": 
-		hadoop_enabled => true,
-		require        => Class["analytics::datastax::apt_source"]
-	}
+
+	# install Datastax Enterprise Cassandra Hadoop
+	include dse
 
 
 	$cassandra_cluster_name = "KrakenAnalytics"
