@@ -9,8 +9,6 @@ node analytics_basenode {
 
 # cassandra nodes
 node /^analytics10(0[2-9]|10)/ inherits analytics_basenode {
-	include analytics::datastax::apt_source
-
 	# install Datastax Enterprise Cassandra Hadoop
 	include dse
 
