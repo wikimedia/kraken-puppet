@@ -9,14 +9,14 @@ class dse::cassandra::config {
         require => Group['cassandra'],
     }
 
-	file { $commit_log_directory: 
+	file { $dse::cassandra::server::commit_log_directory: 
 		ensure => "directory",
 		owner  => 'cassandra',
 		group  => 'cassandra',
 		mode   => 0755,
 	}
 
-	file { $data_file_directories: 
+	file { $dse::cassandra::server::data_file_directories: 
 		ensure => "directory",
 		owner  => 'cassandra',
 		group  => 'cassandra',
