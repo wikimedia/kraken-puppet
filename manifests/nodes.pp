@@ -12,7 +12,6 @@ node /^analytics10(0[2-9]|10)/ inherits analytics_basenode {
 	# install Datastax Enterprise Cassandra Hadoop
 	include dse
 
-
 	$cassandra_cluster_name = "KrakenAnalytics"
 
 	$cassandra_seeds = [
