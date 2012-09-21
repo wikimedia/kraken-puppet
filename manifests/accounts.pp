@@ -6,7 +6,7 @@ class kraken_accounts {
 	include declerambaul
 	include olivneh
 	include erosen
-	include dvanliere
+	include diederik
 }
 
 class diederik inherits baseaccount {
