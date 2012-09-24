@@ -35,6 +35,12 @@ node /^analytics10(0[2-9]|10)/ inherits analytics_basenode {
 	}
 }
 
+# trying out kafka hadoop consumer.
+# an18 needs Datastax packages but will not run cassandra.
+node analytics1018 inherits analytics_basenode {
+	dse::packages
+}
+
 # # analytics1001 is master node (namenode & jobtracker)
 # node analytics1001 inherits analytics_basenode {
 # 	class { "analytics::master": require => Class["analytics_temp"] }
