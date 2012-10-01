@@ -23,7 +23,7 @@ class cdh {
 }
 
 
-class cdh::apt_source($version = 'cdh4') {
+class cdh::apt_source($version = 'cdh3') {
 	file { "/etc/apt/sources.list.d/cloudera.list":
 		content => "deb http://archive.cloudera.com/debian ${lsbdistcodename}-${version} contrib\ndeb-src http://archive.cloudera.com/debian ${lsbdistcodename}-${version} contrib\n",
 		mode    => 0444,
