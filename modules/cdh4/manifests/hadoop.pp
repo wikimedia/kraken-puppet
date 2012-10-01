@@ -20,28 +20,36 @@ class cdh4::hadoop {
 # == Class cdh4::hadoop::master
 #
 # The Hadoop Master is the namenode, jobtracker (MRv1) and resource manager, proxy server and history server (YARN)
-class cdh4::hadoop::master($enable_yarn = true, $enable_mapreduce_v1 = true) inherits cdh4::hadoop {
+class cdh4::hadoop::master($mapreduce_version = 'yarn') inherits cdh4::hadoop {
+	# Both YARN and MRv1 use namenode
 	include cdh4::hadoop::service::namenode
 
-	if ($enable_mapreduce_v1) {
-		include cdh4::hadoop::service::jobtracker
-	}
-	if ($enable_yarn) {
+	# If we are using YARN, set up the resource manager
+	if ($mapreduce_version == 'yarn') {
 		include cdh4::hadoop::service::resourcemanager
 	}
+	# else use a jobtracker
+	else {
+		include cdh4::hadoop::service::jobtracker
+	}
 }
+
 
 # == Class cdh4::hadoop::slave
 #
 # The Hadoop Master is the datanode, tasktracker (MRv1) and node manager (YARN)
 
-class cdh4::hadoop::slave($enable_yarn = true, $enable_mapreduce_v1 = true) inherits cdh4::hadoop {
+class cdh4::hadoop::slave($mapreduce_version = 'yarn') inherits cdh4::hadoop {
+	# Both YARN and MRv1 use datanode
 	include cdh4::hadoop::service::datanode
-	
-	if ($enable_mapreduce_v1) {
-		include cdh4::hadoop::service::tasktracker
-	}
-	if ($enable_yarn) {
+
+	# If we are using YARN, install the nodemanager
+	if ($mapreduce_version == 'yarn') {
 		include cdh4::hadoop::service::nodemanager
 	}
+	# else use a tasktracker
+	else {
+		include cdh4::hadoop::service::tasktracker
+	}
+
 }
