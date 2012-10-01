@@ -13,7 +13,7 @@
 #  License.
 #
 
-class cdh::zookeeper::install inherits cdh::zookeeper::params {
+class cdh4::zookeeper::install inherits cdh4::zookeeper::params {
   package { $package_names:
     ensure => latest,
   }

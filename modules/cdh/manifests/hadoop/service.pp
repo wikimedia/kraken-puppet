@@ -10,7 +10,7 @@
 #
 class cdh::hadoop::service::namenode {
 	# install namenode daemon package
-	package { "hadoop-0.20-namenode": ensure => latest }
+	package { "hadoop-0.20-namenode": ensure => installed }
 }
 
 # Class: cdh::hadoop::service::datanode
@@ -18,7 +18,7 @@ class cdh::hadoop::service::namenode {
 #
 class cdh::hadoop::service::datanode {
 	# install datanode daemon package
-	package { "hadoop-0.20-datanode": ensure => latest }
+	package { "hadoop-0.20-datanode": ensure => installed }
 }
 
 # Class: cdh::hadoop::service::jobtracker
@@ -26,7 +26,7 @@ class cdh::hadoop::service::datanode {
 #
 class cdh::hadoop::service::jobtracker {
 	# install jobtracker daemon package
-	package { "hadoop-0.20-jobtracker": ensure => latest }
+	package { "hadoop-0.20-jobtracker": ensure => installed }
 }
 
 # Class: cdh::hadoop::service::tasktracker
@@ -34,5 +34,5 @@ class cdh::hadoop::service::jobtracker {
 #
 class cdh::hadoop::service::tasktracker {
 	# install tasktracker daemon package
-	package { "hadoop-0.20-tasktracker": ensure => latest }
+	package { "hadoop-0.20-tasktracker": ensure => installed }
 }

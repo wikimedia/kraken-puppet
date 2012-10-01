@@ -24,16 +24,17 @@ class cdh4 {
 
 
 class cdh4::apt_source {
-	file { "/etc/apt/sources.list.d/cloudera4.list":
-		content => "deb http://archive.cloudera.com/cdh4/${lsbdistid}/${lsbdistcodename}/${architecture}/cdh ${lsbdistcodename}-cdh4 contrib\ndeb-src http://archive.cloudera.com/cdh4/${lsbdistid}/${lsbdistcodename}/${architecture}/cdh ${lsbdistcodename}-cdh4 contrib\n",
+	$operatingsystem_lowercase = inline_template("<%= operatingsystem.downcase %>")
+
+	file { "/etc/apt/sources.list.d/cdh4.list":
+		content => "deb [arch=${architecture}] http://archive.cloudera.com/cdh4/${operatingsystem_lowercase}/${lsbdistcodename}/${architecture}/cdh ${lsbdistcodename}-cdh4 contrib\ndeb-src http://archive.cloudera.com/cdh4/${operatingsystem_lowercase}/${lsbdistcodename}/${architecture}/cdh ${lsbdistcodename}-cdh4 contrib\n",
 		mode    => 0444,
 		ensure  => 'present',
 	}
 
 	exec { "import_cloudera_apt_key":
-		command   => "/usr/bin/curl -s http://archive.cloudera.com/cdh4/${lsbdistid}/${lsbdistcodename}/${architecture}/cdh/archive.key | /usr/bin/apt-key add -",
-		require   => Package["curl"],
-		subscribe => File["/etc/apt/sources.list.d/cloudera4.list"],
+		command   => "/usr/bin/curl -s http://archive.cloudera.com/cdh4/${operatingsystem_lowercase}/${lsbdistcodename}/${architecture}/cdh/archive.key | /usr/bin/apt-key add -",
+		subscribe => File["/etc/apt/sources.list.d/cdh4.list"],
 		unless    => "/usr/bin/apt-key list | /bin/grep -q Cloudera",
 	}
 

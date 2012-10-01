@@ -15,6 +15,6 @@
 
 class cdh::oozie::client::install inherits cdh::oozie::client::params {
   package { $package_names:
-    ensure => latest,
+    ensure => installed,
   }
 }

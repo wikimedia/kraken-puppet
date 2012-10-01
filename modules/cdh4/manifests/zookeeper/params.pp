@@ -13,6 +13,6 @@
 #  License.
 #
 
-class cdh::zookeeper::params {
+class cdh4::zookeeper::params {
   $package_names = [ "zookeeper-server" ]
 }
