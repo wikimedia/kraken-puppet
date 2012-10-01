@@ -11,8 +11,8 @@ node analytics_basenode {
 # analytics1002-1022
 node /^analytics10(0[2-9]|1[0-9]|2[0-2])/ inherits analytics_basenode {
 	# TODO, remove apt_source when we go to production
-	class { "cdh::apt_source": version => 'cdh4' }
-	class { "cdh": require => Class["cdh::apt_source"] }
+	include cdh4::apt_source
+	# class { "cdh": require => Class["cdh::apt_source"] }
 }
 
 
