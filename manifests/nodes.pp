@@ -1,18 +1,26 @@
 
 node analytics_basenode {
 	include analytics_temp
-
-	# analytics nodes don't have access to internet.  
-	# set this proxy as default for testing.
-	Exec { environment => 'http_proxy=http://brewster.wikimedia.org:8080' }
+	# TODO, remove apt_source when we go to production
+	include cdh4::apt_source
+	include cdh4
 }
+
+
+# analytics1001 is Hadoop Master (i.e NameNode, JobTracker, and ResourceManager)
+node analytics1001 inherits analytics_basenode {
+	include cdh4::hadoop::master
+}
+
 
 # install CDH4 on 20 nodes:
 # analytics1002-1022
 node /^analytics10(0[2-9]|1[0-9]|2[0-2])/ inherits analytics_basenode {
-	# TODO, remove apt_source when we go to production
-	include cdh4::apt_source
-	# class { "cdh": require => Class["cdh::apt_source"] }
+	# analytics nodes don't have access to internet.  
+	# set this proxy as default for testing.
+	Exec { environment => 'http_proxy=http://brewster.wikimedia.org:8080' }
+	
+	include cdh4::hadoop::slave
 }
 
 
