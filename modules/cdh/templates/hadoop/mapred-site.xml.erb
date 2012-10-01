@@ -39,5 +39,12 @@
     <value><%= tasktracker_reduce_tasks_maximum.to_i * tasktracker_node_count.to_i %></value>
   </property>
 
+  <% if mapreduce_framework_name == 'yarn' -%>
+  <property>
+   <name>mapreduce.framework.name</name>
+   <value>yarn</value>
+  </property>
+  <% end -%>
+
 </configuration>
   

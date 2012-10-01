@@ -2,6 +2,7 @@
 # for Apache Hadoop, to be managed by Cloudera SCM
 
 # This puppet module was adapted from a CDH3 module.
+# NOTE.  Only YARN is currently supported by this module.
 
 ## Description
 Currently installs HDFS, mapred, hive, hbase, and zookeeper

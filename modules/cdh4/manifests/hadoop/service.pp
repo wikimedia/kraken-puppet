@@ -24,21 +24,21 @@ class cdh4::hadoop::service::datanode {
 	package { "hadoop-hdfs-datanode": ensure => installed }
 }
 
-# Class: cdh4::hadoop::service::jobtracker
-class cdh4::hadoop::service::jobtracker {
-	require cdh4::hadoop::service::namenode
-
-	# install jobtracker daemon package
-	package { "hadoop-0.20-mapreduce-jobtracker": ensure => installed }
-}
-
-# Class: cdh4::hadoop::service::tasktracker
-class cdh4::hadoop::service::tasktracker {
-	require cdh4::hadoop::service::datanode
-	
-	# install tasktracker daemon package
-	package { "hadoop-0.20-mapreduce-tasktracker": ensure => installed }
-}
+# # Class: cdh4::hadoop::service::jobtracker
+# class cdh4::hadoop::service::jobtracker {
+# 	require cdh4::hadoop::service::namenode
+# 
+# 	# install jobtracker daemon package
+# 	package { "hadoop-0.20-mapreduce-jobtracker": ensure => installed }
+# }
+# 
+# # Class: cdh4::hadoop::service::tasktracker
+# class cdh4::hadoop::service::tasktracker {
+# 	require cdh4::hadoop::service::datanode
+# 	
+# 	# install tasktracker daemon package
+# 	package { "hadoop-0.20-mapreduce-tasktracker": ensure => installed }
+# }
 
 
 
