@@ -45,7 +45,7 @@ class cdh4::hadoop::service::resourcemanager {
 	require cdh4::hadoop::install::resourcemanager
 	require cdh4::hadoop::service::namenode
 
-	# install resourcemanager daemon package
+	# ResourceManager (YARN JobTracker)
 	service { "hadoop-yarn-resourcemanager":
 		ensure => "running",
 		enable => true,
@@ -59,18 +59,11 @@ class cdh4::hadoop::service::nodemanager {
 	require cdh4::hadoop::install::nodemanager
 	require cdh4::hadoop::service::datanode
 
-	# nodemanager
+	# NodeManager (YARN TaskTracker)
 	service { "hadoop-yarn-nodemanager":
 		ensure => "running",
 		enable => true,
 		alias  => "nodemanager",
-	}
-
-	# mapreduce (YARN)
-	service { "hadoop-mapreduce":
-		ensure => "running",
-		enable => true,
-		alias  => "mapreduce",
 	}
 }
 
