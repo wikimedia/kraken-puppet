@@ -37,7 +37,7 @@ class cdh4::hadoop::install::datanode {
 # YARN packages
 #
 
-class cdh4::hadoop::service::resourcemanager {
+class cdh4::hadoop::install::resourcemanager {
 	# ResourceManager is on the NameNode
 	require cdh4::hadoop::install::namenode
 
@@ -47,21 +47,21 @@ class cdh4::hadoop::service::resourcemanager {
 }
 
 
-class cdh4::hadoop::service::nodemanager {
+class cdh4::hadoop::install::nodemanager {
 	# nodemanagers are also datanodes
-	require cdh4::hadoop::service::datanode
+	require cdh4::hadoop::install::datanode
 
 	# install nodemanager and mapreduce (YARN) daemon package
 	# (Analagous to TaskTracker)
 	package { ["hadoop-yarn-nodemanager", "hadoop-mapreduce"]: ensure => installed }
 }
 
-class cdh4::hadoop::service::historyserver {
+class cdh4::hadoop::install::historyserver {
 	# install historyserver daemon package
 	package { "hadoop-mapreduce-historyserver": ensure => installed }
 }
 
-class cdh4::hadoop::service::proxyserver {
+class cdh4::hadoop::install::proxyserver {
 	# install proxyserver daemon package
 	package { "hadoop-yarn-proxyserver": ensure => installed }
 }
