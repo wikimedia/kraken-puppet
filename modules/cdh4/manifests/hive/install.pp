@@ -13,6 +13,6 @@
 #  License.
 #
 
-class cdh::hive::install inherits cdh::hive::params {
+class cdh4::hive::install {
 	package { "hadoop-hive": ensure => installed }
 }
