@@ -31,6 +31,12 @@ class cdh4::apt_source {
 		mode    => 0444,
 		ensure  => 'present',
 	}
+	
+	if $hostname != 'analytics1001' {
+		Exec {
+			environment => "http_proxy=http://brewster.wikimedia.org:8080"
+		}
+	}
 
 	exec { "import_cloudera_apt_key":
 		command   => "/usr/bin/curl -s http://archive.cloudera.com/cdh4/${operatingsystem_lowercase}/${lsbdistcodename}/${architecture}/cdh/archive.key | /usr/bin/apt-key add -",

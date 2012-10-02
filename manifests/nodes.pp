@@ -3,13 +3,21 @@ node analytics_basenode {
 	include analytics_temp
 	# TODO, remove apt_source when we go to production
 	include cdh4::apt_source
-	include cdh4
+	class { "cdh4": 
+		require => Class["cdh4::apt_source"],
+	}
+	class { "analytics::hadoop::config": 
+		require => Class["cdh4"],
+	}
+
 }
 
 
 # analytics1001 is Hadoop Master (i.e NameNode, JobTracker, and ResourceManager)
 node analytics1001 inherits analytics_basenode {
-	include cdh4::hadoop::master
+	include analytics::http_proxy
+
+	class { "cdh4::hadoop::master": require => Class["cdh4::apt_source"] }
 }
 
 
@@ -20,7 +28,7 @@ node /^analytics10(0[2-9]|1[0-9]|2[0-2])/ inherits analytics_basenode {
 	# set this proxy as default for testing.
 	Exec { environment => 'http_proxy=http://brewster.wikimedia.org:8080' }
 	
-	include cdh4::hadoop::slave
+	class { "cdh4::hadoop::slave": require => Class["cdh4::apt_source"] }
 }
 
 

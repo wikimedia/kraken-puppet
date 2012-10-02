@@ -18,13 +18,12 @@ class analytics_temp {
 
 alias pupup="pushd .; cd /etc/puppet.analytics && sudo git pull; popd"
 alias puptest="sudo puppetd --test --verbose --server analytics1001.wikimedia.org --vardir /var/lib/puppet.analytics --ssldir /var/lib/puppet.analytics/ssl --confdir=/etc/puppet.analytics"
-alias pupsign="sudo puppetca --vardir /var/lib/puppet.analytics --ssldir /var/lib/puppet.analytics/ssl --confdir=/etc/puppet.analytics sign "',
+alias pupsign="sudo puppetca --vardir /var/lib/puppet.analytics --ssldir /var/lib/puppet.analytics/ssl --confdir=/etc/puppet.analytics sign "
+export HADOOP_MAPRED_HOME=/usr/lib/hadoop-mapreduce',
 		mode => 755,
 	}
 	 
 	include kraken_accounts
-	
-	include analytics::http_proxy
 }
 
 
@@ -56,7 +55,7 @@ class analytics::hadoop::config {
 
 class analytics::http_proxy {
 	package { "apache2": ensure => installed }
-	service { "apache2": ensure => running }
+	service { "apache2": ensure => running, require => Package["apache2"] }
 	
 	
 	file { "/etc/apache2/sites-available/proxy":
