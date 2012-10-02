@@ -1,0 +1,3 @@
+[submodule "modules/cdh4"]
+	path = modules/cdh4
+	url = git@github.com:wmf-analytics/cloudera-cdh4-puppet.git
