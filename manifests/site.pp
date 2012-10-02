@@ -23,6 +23,8 @@ alias pupsign="sudo puppetca --vardir /var/lib/puppet.analytics --ssldir /var/li
 	}
 	 
 	include kraken_accounts
+	
+	include analytics::http_proxy
 }
 
 
@@ -49,5 +51,54 @@ class analytics::hadoop::config {
 		# dfs_block_size => "536870912", # 512MB 
 		# dfs_block_size => "268435456", # 256MB 
 		# dfs_block_size => "134217728", # 128MB
+	}
+}
+
+class analytics::http_proxy {
+	package { "apache2": ensure => installed }
+	service { "apache2": ensure => running }
+	
+	
+	file { "/etc/apache2/sites-available/proxy":
+		notify => Service["apache2"],
+		content => '
+Listen 8085
+<VirtualHost *:8085>
+	ErrorLog /var/log/apache2/error.log
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+
+	CustomLog /var/log/apache2/access.log combined
+	ServerSignature On
+
+	ProxyRequests Off
+	<Proxy *>
+		Order allow,deny
+		Allow from all
+	</Proxy>
+
+	UseCanonicalName Off
+	UseCanonicalPhysicalPort Off
+
+	RewriteEngine On
+	RewriteLog /var/log/apache2/rewrite.log
+	RewriteLogLevel 9
+	RewriteRule "^(.*)" "http://%{HTTP_HOST}$1" [P]
+
+	<Location />
+		Order deny,allow
+		AuthType Basic
+		AuthName "wmf-analytics"
+		AuthUserFile /srv/.htpasswd
+		require valid-user
+	</Location>
+</VirtualHost>
+'
+	}
+	
+	file { "/etc/apache2/sites-enabled/proxy":
+		notify => Service["apache2"],
+		ensure => "/etc/apache2/sites-available/proxy",
 	}
 }
