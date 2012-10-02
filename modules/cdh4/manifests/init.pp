@@ -1,4 +1,7 @@
 
+# == Class cdh4
+#
+# Installs common Cloudera / Hadoop packages.
 class cdh4 {
 	include hadoop
 	include hbase
@@ -10,6 +13,15 @@ class cdh4 {
 }
 
 
+# == Class cdh4::apt_source
+# 
+# Configures an apt source list pointing at
+# Cloudera's CDH4 apt repository.
+# 
+# This class is not included by default.  If
+# you want to use Cloudera's apt repository,
+# make sure you include this as a dependency (using before =>)
+# you include other cdh4 classes.
 class cdh4::apt_source {
 	$operatingsystem_lowercase = inline_template("<%= operatingsystem.downcase %>")
 

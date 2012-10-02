@@ -43,19 +43,23 @@ class cdh4::hadoop::config(
 	# TODO: set default map/reduce tasks
 	# automatically based on node stats.
 	file { "$config_directory/core-site.xml":
-		content => template("cdh4/hadoop/core-site.xml.erb")
+		content => template("cdh4/hadoop/core-site.xml.erb"),
+		before  => [Service["namenode"], Service["datanode"]],
 	}
 
 	file { "$config_directory/hdfs-site.xml":
-		content => template("cdh4/hadoop/hdfs-site.xml.erb")
+		content => template("cdh4/hadoop/hdfs-site.xml.erb"),
+		before  => [Service["namenode"], Service["datanode"]],
 	}
 
 	file { "$config_directory/yarn-site.xml":
 		content => template("cdh4/hadoop/yarn-site.xml.erb")
+		before  => [Service["resourcemanager"], Service["nodemanager"]],
 	}
 
 	# only need this to set framework.name
 	file { "$config_directory/mapred-site.xml":
 		content => template("cdh4/hadoop/mapred-site.xml.erb")
+		before  => [Service["resourcemanager"], Service["nodemanager"]],
 	}
 }

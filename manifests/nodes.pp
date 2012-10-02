@@ -6,10 +6,8 @@ node analytics_basenode {
 	class { "cdh4": 
 		require => Class["cdh4::apt_source"],
 	}
-	class { "analytics::hadoop::config": 
-		require => Class["cdh4"],
-	}
-
+	
+	include analytics::hadoop::config
 }
 
 
@@ -28,7 +26,7 @@ node /^analytics10(0[2-9]|1[0-9]|2[0-2])/ inherits analytics_basenode {
 	# set this proxy as default for testing.
 	Exec { environment => 'http_proxy=http://brewster.wikimedia.org:8080' }
 	
-	class { "cdh4::hadoop::slave": require => Class["cdh4::apt_source"] }
+	class { "cdh4::hadoop::worker": require => Class["cdh4::apt_source"] }
 }
 
 
