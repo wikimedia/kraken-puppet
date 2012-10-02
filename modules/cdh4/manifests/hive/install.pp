@@ -14,5 +14,5 @@
 #
 
 class cdh4::hive::install {
-	package { "hadoop-hive": ensure => installed }
+	package { "hive": ensure => installed }
 }

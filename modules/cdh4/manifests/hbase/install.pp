@@ -14,5 +14,5 @@
 #
 
 class cdh4::hbase::install {
-	package { "hadoop-hbase": ensure => installed }
+	package { "hbase": ensure => installed }
 }
