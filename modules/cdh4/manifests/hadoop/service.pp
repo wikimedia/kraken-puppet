@@ -1,9 +1,10 @@
-# Currently these classes
-# only install the appropriate CDH4 daemon
-# packages in order to start services.
-# If we end up using hadoop in production,
-# these classes can also ensure that
-# the appropriate services are running.
+# This file contains classes to manage the various
+# Hadoop services.  Each of the ::service:: classes
+# require their corresponding ::install:: classes.
+#
+# You should probably not include these classes directly,
+# but instead use the hadoop::master and hadoop::worker
+# classes defined in hadoop.pp.
 
 
 class cdh4::hadoop::service::namenode {
@@ -43,7 +44,6 @@ class cdh4::hadoop::service::datanode {
 
 class cdh4::hadoop::service::resourcemanager {
 	require cdh4::hadoop::install::resourcemanager
-	require cdh4::hadoop::service::namenode
 
 	# ResourceManager (YARN JobTracker)
 	service { "hadoop-yarn-resourcemanager":
@@ -57,7 +57,6 @@ class cdh4::hadoop::service::resourcemanager {
 class cdh4::hadoop::service::nodemanager {
 	# nodemanagers are also datanodes
 	require cdh4::hadoop::install::nodemanager
-	require cdh4::hadoop::service::datanode
 
 	# NodeManager (YARN TaskTracker)
 	service { "hadoop-yarn-nodemanager":

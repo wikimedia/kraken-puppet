@@ -1,3 +1,6 @@
+# This file contains classes to install
+# CDH4 Hadoop packages.
+
 
 class cdh4::hadoop::install::client {
 	# install hadoop-client, all nodes should have this.
@@ -19,8 +22,10 @@ class cdh4::hadoop::install::datanode {
 	package { "hadoop-hdfs-datanode": ensure => installed }
 }
 
+
+
 #
-# YARN packages
+# YARN specific packages
 #
 
 class cdh4::hadoop::install::resourcemanager {
