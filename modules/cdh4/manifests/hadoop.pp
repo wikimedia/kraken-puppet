@@ -14,7 +14,7 @@
 #
 
 class cdh4::hadoop {
-  include cdh4::hadoop::install
+  include cdh4::hadoop::install::client
 }
 
 # == Class cdh4::hadoop::master

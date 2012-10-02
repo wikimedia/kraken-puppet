@@ -13,8 +13,55 @@
 #  License.
 #
 
-class cdh4::hadoop::install inherits cdh4::hadoop::params {
-  package { $package_names:
-    ensure => installed,
-  }
+class cdh4::hadoop::install::client {
+	# install hadoop-client, all nodes should have this.
+	package { "hadoop-client": ensure => installed }
+}
+
+class cdh4::hadoop::install::namenode {
+	# install namenode daemon package
+	package { "hadoop-hdfs-namenode": ensure => installed }
+}
+
+class cdh4::hadoop::install::secondarynamenode {
+	# install secondarynamenode daemon package
+	package { "hadoop-hdfs-secondarynamenode": ensure => installed }
+}
+
+class cdh4::hadoop::install::datanode {
+	# install datanode daemon package
+	package { "hadoop-hdfs-datanode": ensure => installed }
+}
+
+#
+# YARN packages
+#
+
+class cdh4::hadoop::service::resourcemanager {
+	# ResourceManager is on the NameNode
+	require cdh4::hadoop::install::namenode
+
+	# install resourcemanager daemon package
+	# (Analagous to JobTracker)
+	package { "hadoop-yarn-resourcemanager": ensure => installed }
+}
+
+
+class cdh4::hadoop::service::nodemanager {
+	# nodemanagers are also datanodes
+	require cdh4::hadoop::service::datanode
+
+	# install nodemanager and mapreduce (YARN) daemon package
+	# (Analagous to TaskTracker)
+	package { ["hadoop-yarn-nodemanager", "hadoop-mapreduce"]: ensure => installed }
+}
+
+class cdh4::hadoop::service::historyserver {
+	# install historyserver daemon package
+	package { "hadoop-mapreduce-historyserver": ensure => installed }
+}
+
+class cdh4::hadoop::service::proxyserver {
+	# install proxyserver daemon package
+	package { "hadoop-yarn-proxyserver": ensure => installed }
 }

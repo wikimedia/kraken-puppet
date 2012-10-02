@@ -13,6 +13,9 @@
 #  License.
 #
 
-class cdh4::zookeeper::install {
-  package { "zookeeper-server": ensure => latest }
+# (c) Copyright 2011 Cloudera, Inc.
+# All rights reserved.
+
+class cdh4::hive {
+  include cdh4::hive::install
 }

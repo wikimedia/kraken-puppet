@@ -13,8 +13,6 @@
 #  License.
 #
 
-class cdh4::pig::install inherits cdh4::pig::params {
-  package { $package_names:
-    ensure => installed,
-  }
+class cdh4::pig::install {
+  package { "pig": ensure => installed }
 }

@@ -15,8 +15,8 @@
 
 class cdh4 {
 	include hadoop
-	# include hbase
-	# include hive
+	include hbase
+	include hive
 	include zookeeper
 	include pig
 	# include oozie

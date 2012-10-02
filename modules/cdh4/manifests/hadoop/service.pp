@@ -6,23 +6,103 @@
 # the appropriate services are running.
 
 
-# Class: cdh4::hadoop::service::namenode
 class cdh4::hadoop::service::namenode {
-	# install namenode daemon package
-	package { "hadoop-hdfs-namenode": ensure => installed }
+	require cdh4::hadoop::install::namenode
+	
+	service { "hadoop-hdfs-namenode": 
+		ensure => "running",
+		enable => true,
+		alias  => "namenode",
+	}
 }
 
-# Class: cdh4::hadoop::service::namenode
 class cdh4::hadoop::service::secondarynamenode {
-	# install secondarynamenode daemon package
-	package { "hadoop-hdfs-secondarynamenode": ensure => installed }
+	require cdh4::hadoop::install::secondarynamenode
+
+	service { "hadoop-hdfs-secondarynamenode": 
+		ensure => "running",
+		enable => true,
+		alias  => "secondarynamenode",
+	}
 }
 
-# Class: cdh4::hadoop::service::datanode
 class cdh4::hadoop::service::datanode {
+	require cdh4::hadoop::install::datanode
+
 	# install datanode daemon package
-	package { "hadoop-hdfs-datanode": ensure => installed }
+	service { "hadoop-hdfs-datanode": 
+		ensure => "running",
+		enable => true,
+		alias  => "datanode",
+	}
 }
+
+#
+# YARN services
+#
+
+class cdh4::hadoop::service::resourcemanager {
+	require cdh4::hadoop::install::resourcemanager
+	require cdh4::hadoop::service::namenode
+
+	# install resourcemanager daemon package
+	service { "hadoop-yarn-resourcemanager":
+		ensure => "running",
+		enable => true,
+		alias  => "resourcemanager",
+	}
+}
+
+
+class cdh4::hadoop::service::nodemanager {
+	# nodemanagers are also datanodes
+	require cdh4::hadoop::install::nodemanager
+	require cdh4::hadoop::service::datanode
+
+	# nodemanager
+	service { "hadoop-yarn-nodemanager":
+		ensure => "running",
+		enable => true,
+		alias  => "nodemanager",
+	}
+
+	# mapreduce (YARN)
+	service { "hadoop-mapreduce":
+		ensure => "running",
+		enable => true,
+		alias  => "mapreduce",
+	}
+}
+
+class cdh4::hadoop::service::historyserver {
+	require cdh4::hadoop::install::historyserver
+
+	service { "hadoop-mapreduce-historyserver":
+		ensure => "running",
+		enable => true,
+		alias  => "historyserver",
+	}
+}
+
+class cdh4::hadoop::service::proxyserver {
+	require cdh4::hadoop::install::proxyserver
+
+	# install proxyserver daemon package
+	service { "hadoop-yarn-proxyserver":
+		ensure => "running",
+		enable => true,
+		alias  => "proxyserver",
+	}
+}
+
+
+
+
+
+
+
+
+
 
 # # Class: cdh4::hadoop::service::jobtracker
 # class cdh4::hadoop::service::jobtracker {
@@ -39,39 +119,3 @@ class cdh4::hadoop::service::datanode {
 # 	# install tasktracker daemon package
 # 	package { "hadoop-0.20-mapreduce-tasktracker": ensure => installed }
 # }
-
-
-
-# YARN packages and services
-
-# Class: cdh4::hadoop::service::resourcemanager
-# (Analagous to JobTracker)
-class cdh4::hadoop::service::resourcemanager {
-	require cdh4::hadoop::service::namenode
-
-	# install resourcemanager daemon package
-	package { "hadoop-yarn-resourcemanager": ensure => installed }
-}
-
-
-# Class: cdh4::hadoop::service::nodemanager
-# (Analagous to TaskTracker)
-class cdh4::hadoop::service::nodemanager {
-	# nodemanagers are also datanodes
-	require cdh4::hadoop::service::datanode
-
-	# install nodemanager and mapreduce (YARN) daemon package
-	package { ["hadoop-yarn-nodemanager", "hadoop-mapreduce"]: ensure => installed }
-}
-
-# Class: cdh4::hadoop::service::historyserver
-class cdh4::hadoop::service::historyserver {
-	# install historyserver daemon package
-	package { "hadoop-mapreduce-historyserver": ensure => installed }
-}
-
-# Class: cdh4::hadoop::service::proxyserver
-class cdh4::hadoop::service::proxyserver {
-	# install proxyserver daemon package
-	package { "hadoop-yarn-proxyserver": ensure => installed }
-}

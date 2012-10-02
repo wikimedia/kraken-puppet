@@ -13,6 +13,6 @@
 #  License.
 #
 
-class cdh4::pig::params {
-  $package_names = [ "pig" ]
+class cdh::hive::install inherits cdh::hive::params {
+	package { "hadoop-hive": ensure => installed }
 }

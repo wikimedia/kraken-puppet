@@ -13,6 +13,6 @@
 #  License.
 #
 
-class cdh4::zookeeper::params {
-  $package_names = [ "zookeeper-server" ]
+class cdh4::hbase::install {
+	package { "hadoop-hbase": ensure => installed }
 }

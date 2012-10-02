@@ -13,6 +13,9 @@
 #  License.
 #
 
-class cdh4::hadoop::params {
-  $package_names = [ "hadoop-client" ]
+# (c) Copyright 2011 Cloudera, Inc.
+# All rights reserved.
+
+class cdh4::hbase {
+  include cdh4::hbase::install
 }

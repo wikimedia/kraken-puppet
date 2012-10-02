@@ -42,11 +42,10 @@ class analytics::hadoop::config {
 		"$hadoop_data_directory/j",
 	]
 
-
 	class { "cdh4::hadoop::config":
 		namenode_hostname => $namenode_hostname,
 		mounts            => $hadoop_mounts,
-		dfs_name_dir  => [$hadoop_name_directory],
+		dfs_name_dir      => [$hadoop_name_directory],
 		# dfs_block_size => "536870912", # 512MB 
 		# dfs_block_size => "268435456", # 256MB 
 		# dfs_block_size => "134217728", # 128MB
@@ -61,7 +60,6 @@ class analytics::http_proxy {
 	file { "/etc/apache2/sites-available/proxy":
 		notify => Service["apache2"],
 		content => '
-Listen 8085
 <VirtualHost *:8085>
 	ErrorLog /var/log/apache2/error.log
 	# Possible values include: debug, info, notice, warn, error, crit,
