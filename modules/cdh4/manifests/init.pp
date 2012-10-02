@@ -19,6 +19,7 @@ class cdh4 {
 	include hive
 	include zookeeper
 	include pig
+	include sqoop
 	# include oozie
 }
 
