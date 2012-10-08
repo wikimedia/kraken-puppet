@@ -6,13 +6,8 @@ node analytics_basenode {
 	class { "cdh4": 
 		require => Class["cdh4::apt_source"],
 	}
-
-	class { "analytics::hadoop::config":
-		map_tasks_maximum    => ($processorcount / 2) - 2,
-		reduce_tasks_maximum => ($processorcount / 2) - 2,
-		map_memory_mb        => 1536,
-		io_file_buffer_size  => 131072,
-	}
+	
+	include analytics::hadoop::config
 }
 
 
