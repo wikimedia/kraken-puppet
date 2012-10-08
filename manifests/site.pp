@@ -47,8 +47,8 @@ class analytics::hadoop::config {
 		mounts               => $hadoop_mounts,
 		dfs_name_dir         => [$hadoop_name_directory],
 		dfs_block_size       => 268435456,  # 256 MB
-		map_tasks_maximum    => ($processorcount / 2) - 2,
-		reduce_tasks_maximum => ($processorcount / 2) - 2,
+		map_tasks_maximum    => ($processorcount - 2) / 2,
+		reduce_tasks_maximum => ($processorcount - 2) / 2,
 		map_memory_mb        => 1536,
 		io_file_buffer_size  => 131072,
 	}
