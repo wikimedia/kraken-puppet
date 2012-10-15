@@ -1,3 +1,6 @@
 [submodule "modules/cdh4"]
 	path = modules/cdh4
 	url = git://github.com/wmf-analytics/puppet-cdh4.git
+[submodule "modules/submodule0"]
+	path = modules/submodule0
+	url = git://github.com/wmf-analytics/puppet-cdh4.git
