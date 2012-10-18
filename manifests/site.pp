@@ -51,6 +51,9 @@ class analytics::hadoop::config {
 		reduce_tasks_maximum => ($processorcount - 2) / 2,
 		map_memory_mb        => 1536,
 		io_file_buffer_size  => 131072,
+		reduce_parallel_copies => 10,
+		mapreduce_job_reuse_jvm_num_tasks => -1,
+		mapreduce_child_java_opts => "-Xmx512M",
 	}
 }
 
