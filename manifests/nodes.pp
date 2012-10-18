@@ -13,8 +13,6 @@ node analytics_basenode {
 
 # analytics1001 is Hadoop Master (i.e NameNode, JobTracker, and ResourceManager)
 node analytics1001 inherits analytics_basenode {
-	include analytics::http_proxy
-
 	class { "cdh4::hadoop::master": require => Class["cdh4::apt_source"] }
 }
 
