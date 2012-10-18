@@ -13,10 +13,14 @@ node analytics_basenode {
 
 # analytics1001 is Hadoop Master (i.e NameNode, JobTracker, and ResourceManager)
 node analytics1001 inherits analytics_basenode {
-	class { "cdh4::hadoop::master": require => Class["cdh4::apt_source"] }
+	require cdh4::apt_source
+
+	include cdh4::hadoop::master
+	include cdh4::oozie::server
 	class { "cdh4::hue":
 		# TODO:  Change secret_key and put it in private puppet repo.
 		secret_key => "MQBvbk9fk9u1hSr7S13auZyYbRAPK0BbSr6k0NLokTNswv1wNU4v90nUhZE3",
+		require    => Class["cdh4::oozie::server"],
 	}
 }
 
