@@ -1,27 +1,7 @@
 
-node analytics_basenode {
-	include analytics_temp
-	# TODO, remove apt_source when we go to production
-	include cdh4::apt_source
-	class { "cdh4": 
-		require => Class["cdh4::apt_source"],
-	}
-	
-	include analytics::hadoop::config
-}
-
-
 # analytics1001 is Hadoop Master (i.e NameNode, JobTracker, and ResourceManager)
-node analytics1001 inherits analytics_basenode {
-	require cdh4::apt_source
-
-	include cdh4::hadoop::master
-	include cdh4::oozie::server
-	class { "cdh4::hue":
-		# TODO:  Change secret_key and put it in private puppet repo.
-		secret_key => "MQBvbk9fk9u1hSr7S13auZyYbRAPK0BbSr6k0NLokTNswv1wNU4v90nUhZE3",
-		require    => Class["cdh4::oozie::server"],
-	}
+node analytics1001 {
+	include analytics::master
 }
 
 
@@ -32,7 +12,7 @@ node /^analytics10(0[2-9]|1[0-9]|2[0-2])/ inherits analytics_basenode {
 	# set this proxy as default for testing.
 	Exec { environment => 'http_proxy=http://brewster.wikimedia.org:8080' }
 	
-	class { "cdh4::hadoop::worker": require => Class["cdh4::apt_source"] }
+	include analytics::worker
 }
 
 
