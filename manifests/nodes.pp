@@ -1,7 +1,7 @@
 
 # analytics1001 is Hadoop Master (i.e NameNode, JobTracker, and ResourceManager)
 node analytics1001 {
-	include analytics::master
+	include role::analytics::master
 }
 
 
@@ -12,7 +12,7 @@ node /^analytics10(0[2-9]|1[0-9]|2[0-2])/ inherits analytics_basenode {
 	# set this proxy as default for testing.
 	Exec { environment => 'http_proxy=http://brewster.wikimedia.org:8080' }
 	
-	include analytics::worker
+	include role::analytics::worker
 }
 
 

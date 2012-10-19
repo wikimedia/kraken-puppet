@@ -1,4 +1,4 @@
-class analytics::base {
+class role::analytics {
 	# TODO, remove apt_source when we go to production
 	require cdh4::apt_source
 	include analytics_temp
@@ -12,7 +12,7 @@ class analytics::base {
 
 
 
-class analytics::master inherits analytics::base {
+class role::analytics::master inherits role::analytics {
 	# hadoop master (namenode, etc.)
 	include cdh4::hadoop::master
 	# oozier server
@@ -25,7 +25,7 @@ class analytics::master inherits analytics::base {
 	}
 }
 
-class analytics::worker inherits analytics::base {
+class role::analytics::worker inherits analytics::base {
 	# hadoop worker (datanode, etc.)
 	include cdh4::hadoop::worker
 }
