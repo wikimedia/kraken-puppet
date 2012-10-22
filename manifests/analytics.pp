@@ -4,7 +4,9 @@ class role::analytics {
 	include analytics_temp
 
 	# install common cdh4 packages and config
-	include cdh4 
+	class { "cdh4":
+		require => "cdh4::apt_source",
+	}
 
 	# hadoop config is common to all nodes
 	include analytics::hadoop::config
