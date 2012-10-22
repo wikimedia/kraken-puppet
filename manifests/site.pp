@@ -11,7 +11,7 @@ class analytics_temp {
 		returns => [ 0, 100 ],
 	}
 
-	package { ["curl", "dstat"]: ensure => "installed" }
+	package { ["curl", "dstat"]: ensure => "installed", before => Class["cdh4::apt_source"] }
 
 	file { "/etc/profile.d/analytics.sh":
 		content => 'export http_proxy="http://brewster.wikimedia.org:8080"
