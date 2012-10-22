@@ -32,12 +32,12 @@ class role::analytics::master inherits role::analytics {
 	}
 }
 
-class role::analytics::worker inherits analytics::base {
+class role::analytics::worker inherits role::analytics {
 	# hadoop worker (datanode, etc.)
 	include cdh4::hadoop::worker
 }
 
-class role::analytics::zookeeper inherits analytics::base {
+class role::analytics::zookeeper inherits role::analytics {
 	# zookeeper server
 	include analytics::zookeeper::server
 }
