@@ -81,10 +81,6 @@ class analytics::oozie::server {
 	require analytics::packages::mysql_java
 	# require analytics::db::mysql
 
-	package { "libmysql-java":
-		ensure => installed,
-	}
-
 	# symlink the mysql.jar into /var/lib/oozie
 	file { "/var/lib/oozie/mysql.jar":
 		ensure  => "/usr/share/java/mysql.jar",
