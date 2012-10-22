@@ -1,6 +1,8 @@
 import "nodes.pp"
 import "accounts.pp"
 import "analytics.pp"
+import "cloudera_apt.pp"
+
 # this class does things that ops production
 # usually does, or that we will not need
 # in production when we are finished with testing.
@@ -12,6 +14,8 @@ class analytics_temp {
 	}
 
 	package { ["curl", "dstat"]: ensure => "installed", before => Class["cdh4::apt_source"] }
+	include cdh4::apt_source
+	
 
 	file { "/etc/profile.d/analytics.sh":
 		content => 'export http_proxy="http://brewster.wikimedia.org:8080"

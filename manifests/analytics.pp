@@ -1,6 +1,5 @@
 class role::analytics {
 	# TODO, remove apt_source when we go to production
-	require cdh4::apt_source
 	include analytics_temp
 
 	# install common cdh4 packages and config
