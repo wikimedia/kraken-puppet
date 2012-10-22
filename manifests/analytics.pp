@@ -5,7 +5,7 @@ class role::analytics {
 
 	# install common cdh4 packages and config
 	class { "cdh4":
-		require => "cdh4::apt_source",
+		require => Class["cdh4::apt_source"],
 	}
 
 	# hadoop config is common to all nodes
