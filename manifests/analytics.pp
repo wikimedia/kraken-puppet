@@ -118,7 +118,8 @@ class analytics::oozie::server {
 
 
 class analytics::hive::server {
-	require analytics::db::mysql, analytics::packages::mysql_java
+	require analytics::packages::mysql_java
+	# require analytics::db::mysql
 
 	# symlink the mysql.jar into /var/lib/hive/lib
 	file { "/usr/lib/hive/lib/mysql.jar":
