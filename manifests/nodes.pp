@@ -7,7 +7,7 @@ node analytics1001 {
 
 # install CDH4 on 20 nodes:
 # analytics1002-1022
-node /^analytics10(0[2-9]|1[0-9]|2[0-2])/ inherits analytics_basenode {
+node /^analytics10(0[2-9]|1[0-9]|2[0-2])/ {
 	# analytics nodes don't have access to internet.  
 	# set this proxy as default for testing.
 	Exec { environment => 'http_proxy=http://brewster.wikimedia.org:8080' }
@@ -16,7 +16,7 @@ node /^analytics10(0[2-9]|1[0-9]|2[0-2])/ inherits analytics_basenode {
 }
 
 # analytics1023, analytics1024 and anlytics1025 are Zookeeper Servers
-node analytics1023,analytics1024,analytics1025 inherits analytics_basenode {
+node analytics1023,analytics1024,analytics1025 {
 	include role::analytics::zookeeper
 }
 
