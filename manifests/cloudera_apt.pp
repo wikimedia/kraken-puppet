@@ -1,4 +1,4 @@
-# == Class cdh4::apt_source
+# == Class cloudera::apt_source
 # 
 # Configures an apt source list pointing at
 # Cloudera's CDH4 apt repository.
@@ -7,7 +7,7 @@
 # you want to use Cloudera's apt repository,
 # make sure you include this as a dependency (using before =>)
 # you include other cdh4 classes.
-class cdh4::apt_source {
+class cloudera::apt_source {
 	$operatingsystem_lowercase = inline_template("<%= operatingsystem.downcase %>")
 
 	file { "/etc/apt/sources.list.d/cdh4.list":

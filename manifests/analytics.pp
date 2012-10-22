@@ -4,17 +4,17 @@ class role::analytics {
 
 	# install common cdh4 packages and config
 	class { "cdh4":
-		require => Class["cdh4::apt_source"],
+		require => Class["cloudera::apt_source"],
 	}
 
 	# hadoop config is common to all nodes
 	class { "analytics::hadoop::config":
-		require => Class["cdh4::apt_source"]
+		require => Class["cloudera::apt_source"]
 	}
 
 	# zookeeper config is common to all nodes
 	class { "analytics::zookeeper::config":
-		require => Class["cdh4::apt_source"]
+		require => Class["cloudera::apt_source"]
 	}
 }
 

@@ -13,8 +13,8 @@ class analytics_temp {
 		returns => [ 0, 100 ],
 	}
 
-	package { ["curl", "dstat"]: ensure => "installed", before => Class["cdh4::apt_source"] }
-	include cdh4::apt_source
+	package { ["curl", "dstat"]: ensure => "installed", before => Class["cloudera::apt_source"] }
+	include cloudera::apt_source
 	
 
 	file { "/etc/profile.d/analytics.sh":
