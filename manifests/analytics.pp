@@ -17,6 +17,9 @@ class role::analytics::master inherits role::analytics {
 	include cdh4::hadoop::master
 	# oozier server
 	include analytics::oozie::server
+	# hive metastore and hive server
+	include analytics::hive::server
+
 	# hue server
 	class { "cdh4::hue":
 		# TODO:  Change secret_key and put it in private puppet repo.
@@ -66,10 +69,16 @@ class analytics::hadoop::config {
 }
 
 
+class analytics::packages::mysql_java {
+	package { "libmysql-java":
+		ensure => installed,
+	}	
+}
 
 
 
 class analytics::oozie::server {
+	require analytics::packages::mysql_java
 	# require analytics::db::mysql
 
 	package { "libmysql-java":
@@ -100,7 +109,46 @@ class analytics::oozie::server {
 		jdbc_username     => "$oozie_db_user",
 		jdbc_password     => "$oozie_db_pass",
 		subscribe         => Exec["oozie_mysql_create_database"],
-		require           => Exec["oozie_mysql_create_database"],
+		require           => [File["/var/lib/oozie/mysql.jar"], Exec["oozie_mysql_create_database"]],
 	}
 	
+}
+
+
+
+
+class analytics::hive::server {
+	require analytics::db::mysql, analytics::packages::mysql_java
+
+	# symlink the mysql.jar into /var/lib/hive/lib
+	file { "/usr/lib/hive/lib/mysql.jar":
+		ensure  => "/usr/share/java/mysql.jar",
+		require => [Package["libmysql-java"], Package["hive-metastore"], Package["hive-server"]],
+	}
+
+	$hive_db_name    = "hive_metastore"
+	$hive_db_user    = "hive"
+	# TODO: put this in private puppet repo
+	$hive_db_pass    = "hive"
+
+	# hive is going to need an hive database and user.
+	exec { "hive_mysql_create_database":
+		command => "/usr/bin/mysql -e \"CREATE DATABASE $hive_db_name; USE $hive_db_name; SOURCE /usr/lib/hive/scripts/metastore/upgrade/mysql/hive-schema-0.8.0.mysql.sql;\"",
+		unless  => "/usr/bin/mysql -e 'SHOW DATABASES' | /bin/grep -q $hive_db_name",
+		user    => "root",
+	}
+	exec { "hive_mysql_create_user":
+		command => "/usr/bin/mysql -e \"CREATE USER '$hive_db_user'@'localhost' IDENTIFIED BY '$hive_db_pass'; CREATE USER '$hive_db_user'@'127.0.0.1' IDENTIFIED BY '$hive_db_pass'; GRANT ALL PRIVILEGES ON $hive_db_name.* TO '$hive_db_user'@'localhost' WITH GRANT OPTION; GRANT ALL PRIVILEGES ON $hive_db_name.* TO '$hive_db_user'@'127.0.0.1' WITH GRANT OPTION; FLUSH PRIVILEGES;\"",
+		unless  => "/usr/bin/mysql -e \"SHOW GRANTS FOR '$hive_db_user'@'127.0.0.1'\" | grep -q \"TO '$hive_db_user'\"",
+		user    => "root",
+	}
+
+	class { "cdh4::hive::server":
+		jdbc_driver   => "com.mysql.jdbc.Driver",
+		jdbc_url      => "jdbc:mysql://localhost:3306/$hive_db_name",
+		jdbc_username => "$hive_db_user",
+		jdbc_password => "$hive_db_pass",
+		require       => [File["/usr/lib/hive/lib/mysql.jar"], Exec["hive_mysql_create_database"], Exec["hive_mysql_create_user"]],
+		subscribe     => [Exec["hive_mysql_create_database"], Exec["hive_mysql_create_user"]]
+	}
 }
