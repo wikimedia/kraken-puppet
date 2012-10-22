@@ -9,10 +9,14 @@ class role::analytics {
 	}
 
 	# hadoop config is common to all nodes
-	include analytics::hadoop::config
+	class { "analytics::hadoop::config":
+		require => Class["cdh4::apt_source"]
+	}
 
 	# zookeeper config is common to all nodes
-	include analytics::zookeeper::config
+	class { "analytics::zookeeper::config":
+		require => Class["cdh4::apt_source"]
+	}
 }
 
 
