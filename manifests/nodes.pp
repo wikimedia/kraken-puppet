@@ -15,6 +15,11 @@ node /^analytics10(0[2-9]|1[0-9]|2[0-2])/ inherits analytics_basenode {
 	include role::analytics::worker
 }
 
+# analytics1023, analytics1024 and anlytics1025 are Zookeeper Servers
+node analytics1023,analytics1024,analytics1025 inherits analytics_basenode {
+	include role::analytics::zookeeper
+}
+
 
 
 

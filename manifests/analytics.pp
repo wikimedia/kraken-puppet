@@ -5,8 +5,12 @@ class role::analytics {
 
 	# install common cdh4 packages and config
 	include cdh4 
+
 	# hadoop config is common to all nodes
 	include analytics::hadoop::config
+
+	# zookeeper config is common to all nodes
+	include analytics::zookeeper::config
 }
 
 
@@ -33,7 +37,10 @@ class role::analytics::worker inherits analytics::base {
 	include cdh4::hadoop::worker
 }
 
-
+class role::analytics::zookeeper inherits analytics::base {
+	# zookeeper server
+	include analytics::zookeeper::server
+}
 
 
 
@@ -148,4 +155,22 @@ class analytics::hive::server {
 		require       => [File["/usr/lib/hive/lib/mysql.jar"], Exec["hive_mysql_create_database"], Exec["hive_mysql_create_user"]],
 		subscribe     => [Exec["hive_mysql_create_database"], Exec["hive_mysql_create_user"]]
 	}
+}
+
+class analytics::zookeeper::config {
+	$zookeeper_hosts = [
+		"analytics1023.eqiad.wmnet",
+		"analytics1024.eqiad.wmnet",
+		"analytics1025.eqiad.wmnet"
+	]
+
+	class { "cdh4::zookeeper::config":
+		zookeeper_hosts => $zookeeper_hosts,
+	}
+}
+
+
+class analytics::zookeeper::server {
+	require analytics::zookeeper::config
+	include cdh4::zookeeper::server
 }
