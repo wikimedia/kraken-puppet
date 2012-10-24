@@ -12,6 +12,11 @@ class role::analytics {
 		require => Class["cloudera::apt_source"]
 	}
 
+	# hadoop metrics is common to all nodes
+	class { "analytics::hadoop::metrics":
+		require => Class["analytics::hadoop::config"],
+	}
+
 	# zookeeper config is common to all nodes
 	class { "analytics::zookeeper::config":
 		require => Class["cloudera::apt_source"]
@@ -80,6 +85,11 @@ class analytics::hadoop::config {
 	}
 }
 
+class analytics::hadoop::metrics {
+	class { "cdh4::hadoop::metrics":
+		ganglia_hosts => ["analytics1010.eqiad.wmnet:8649"],
+	}
+}
 
 class analytics::packages::mysql_java {
 	package { "libmysql-java":
