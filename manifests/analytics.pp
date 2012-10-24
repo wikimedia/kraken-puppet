@@ -87,7 +87,8 @@ class analytics::hadoop::config {
 
 class analytics::hadoop::metrics {
 	class { "cdh4::hadoop::metrics":
-		ganglia_hosts => ["analytics1010.eqiad.wmnet:8649"],
+		# TODO:  Use analytics ganglia cluster mcast_address from ganglia.pp in production.
+		ganglia_hosts => ["239.192.1.32:8649"],
 	}
 }
 
