@@ -21,11 +21,11 @@ class role::analytics {
 	class { "analytics::zookeeper::config":
 		require => Class["cloudera::apt_source"]
 	}
-
-	# kafka client and config is common to all nodes
-	class { "analytics::kafka::client":
-		require => File["/etc/apt/sources.list.d/kraken.list"],
-	}
+	# 
+	# # kafka client and config is common to all nodes
+	# class { "analytics::kafka::client":
+	# 	require => File["/etc/apt/sources.list.d/kraken.list"],
+	# }
 }
 
 
