@@ -20,6 +20,10 @@ node analytics1023,analytics1024,analytics1025 {
 	include role::analytics::zookeeper
 }
 
+node analytics1026,analytics1027 {
+	include analytics_temp
+}
+
 
 
 
