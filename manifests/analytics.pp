@@ -61,7 +61,7 @@ class role::analytics::kafka inherits role::analytics {
 	# kafka broker server
 	require analytics::zookeeper::config
 
-	include kafka
+	include kafka, kafka::install
 	class { "kafka::config":
 		zookeeper_hosts => $analytics::zookeeper::config::zookeeper_hosts,
 	}
