@@ -24,7 +24,7 @@ class role::analytics {
 
 	# kafka client and config is common to all nodes
 	class { "analytics::kafka::client":
-		require => [File["/etc/apt/sources.list.d/kraken.list"],
+		require => File["/etc/apt/sources.list.d/kraken.list"],
 	}
 }
 
