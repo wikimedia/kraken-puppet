@@ -21,8 +21,8 @@ node analytics1023,analytics1024,analytics1025 {
 }
 
 
-# analytics1026 and analytics1027 are (temporarily) kafka servers.
-node analytics1026,analytics1027 {
+#  analytics1027 is (temporarily) a kafka servers.
+node analytics1027 {
 	include role::analytics::kafka
 }
 
