@@ -7,6 +7,12 @@ import "cloudera_apt.pp"
 # usually does, or that we will not need
 # in production when we are finished with testing.
 class analytics_temp {
+	if $hostname != 'analytics1001' {
+		Exec {
+			environment => "http_proxy=http://brewster.wikimedia.org:8080"
+		}
+	}
+
 	# Make sure puppet runs apt-get update!
 	exec { "/usr/bin/apt-get update":
 		timeout => 240,
