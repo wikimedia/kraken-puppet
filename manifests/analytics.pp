@@ -59,7 +59,13 @@ class role::analytics::zookeeper inherits role::analytics {
 
 class role::analytics::kafka inherits role::analytics {
 	# kafka broker server
-	include analytics::kafka::server
+	require analytics::zookeeper::config
+
+	include kafka
+	class { "kafka::config":
+		zookeeper_hosts => $analytics::zookeeper::config::zookeeper_hosts,
+	}
+	include kafka::server
 }
 
 
@@ -198,17 +204,4 @@ class analytics::zookeeper::config {
 class analytics::zookeeper::server {
 	require analytics::zookeeper::config
 	include cdh4::zookeeper::server
-}
-
-class analytics::kafka::client {
-	require analytics::zookeeper::config
-
-	include kafka
-	class { "kafka::config":
-		zookeeper_hosts => $analytics::zookeeper::config::zookeeper_hosts,
-	}
-}
-
-class analytics::kafka::server inherits analytics::kafka::client {
-	include kafka::server
 }
