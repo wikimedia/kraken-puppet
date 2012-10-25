@@ -20,8 +20,10 @@ node analytics1023,analytics1024,analytics1025 {
 	include role::analytics::zookeeper
 }
 
+
+# analytics1026 and analytics1027 are (temporarily) kafka servers.
 node analytics1026,analytics1027 {
-	include analytics_temp
+	include role::analytics::kafka
 }
 
 

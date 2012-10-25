@@ -21,6 +21,11 @@ class role::analytics {
 	class { "analytics::zookeeper::config":
 		require => Class["cloudera::apt_source"]
 	}
+
+	# kafka client and config is common to all nodes
+	class { "analytics::kafka::client":
+		require => [File["/etc/apt/sources.list.d/kraken.list"],
+	}
 }
 
 
@@ -52,6 +57,10 @@ class role::analytics::zookeeper inherits role::analytics {
 	include analytics::zookeeper::server
 }
 
+class role::analytics::kafka inherits role::analytics {
+	# kafka broker server
+	include analytics::kafka::server
+}
 
 
 
@@ -189,4 +198,17 @@ class analytics::zookeeper::config {
 class analytics::zookeeper::server {
 	require analytics::zookeeper::config
 	include cdh4::zookeeper::server
+}
+
+class analytics::kafka::client {
+	require analytics::zookeeper::config
+
+	include kafka
+	class { "kafka::config":
+		zookeeper_hosts => $analytics::zookeeper::config::zookeeper_hosts,
+	}
+}
+
+class analytics::kafka::server inherits analytics::kafka::client {
+	include kafka::server
 }
