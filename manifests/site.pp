@@ -11,6 +11,12 @@ class analytics_temp {
 		Exec {
 			environment => "http_proxy=http://brewster.wikimedia.org:8080"
 		}
+
+		file { "/etc/profile.d/http_proxy.sh":
+			mode    => 0755,
+			content => 'export http_proxy="http://brewster.wikimedia.org:8080"
+',
+		}
 	}
 
 	# Make sure puppet runs apt-get update!
@@ -22,16 +28,17 @@ class analytics_temp {
 	package { ["curl", "dstat"]: ensure => "installed", before => Class["cloudera::apt_source"] }
 	include cloudera::apt_source
 	
+	
 
 	file { "/etc/profile.d/analytics.sh":
-		content => 'export http_proxy="http://brewster.wikimedia.org:8080"
-
+		content => '
 alias pupup="pushd .; cd /etc/puppet.analytics && sudo git pull; popd"
 alias puptest="sudo puppetd --test --verbose --server analytics1001.wikimedia.org --vardir /var/lib/puppet.analytics --ssldir /var/lib/puppet.analytics/ssl --confdir=/etc/puppet.analytics"
 alias pupsign="sudo puppetca --vardir /var/lib/puppet.analytics --ssldir /var/lib/puppet.analytics/ssl --confdir=/etc/puppet.analytics sign "
 export HADOOP_MAPRED_HOME=/usr/lib/hadoop-mapreduce',
-		mode => 755,
+		mode => 0755,
 	}
+	
 	 
 	include kraken_accounts
 	
