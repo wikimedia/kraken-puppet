@@ -55,7 +55,7 @@ class role::analytics::master inherits role::analytics {
 		require => Class["cdh4::hadoop::master"],
 	}
 	file { "/usr/lib/hadoop-hdfs/webapps/static/hadoop.css":
-		source  => "file:///usr/lib/hadoop-0.20-mapreduce/webapps/static/hadoop.css"
+		source  => "file:///usr/lib/hadoop-0.20-mapreduce/webapps/static/hadoop.css",
 		require => File["/usr/lib/hadoop-hdfs/webapps/static"],
 	}
 }
