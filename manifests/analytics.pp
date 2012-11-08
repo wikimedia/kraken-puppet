@@ -219,7 +219,7 @@ class analytics::hive::server {
 		stats_enabled            => true,
 		stats_dbclass            => "jdbc:mysql",
 		stats_jdbcdriver         => "com.mysql.jdbc.Driver",
-		stats_dbconnectionstring => "jdbc:mysql://localhost:3306/$hive_stats_db_nane?user=$hive_db_user&amp;password=$hive_db_pass",
+		stats_dbconnectionstring => "jdbc:mysql://localhost:3306/$hive_stats_db_name?user=$hive_db_user&amp;password=$hive_db_pass",
 		require                  => [File["/usr/lib/hive/lib/mysql.jar"], Exec["hive_mysql_create_database"], Exec["hive_mysql_create_user"]],
 		subscribe                => [Exec["hive_mysql_create_database"], Exec["hive_mysql_create_user"]]
 	}
