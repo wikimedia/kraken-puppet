@@ -188,14 +188,25 @@ class analytics::hive::server {
 	# TODO: put this in private puppet repo
 	$hive_db_pass    = "hive"
 
+	# name for hive db stats.
+	# the same mysql user will be used.
+	$hive_stats_db_name = "hive_metrics"
+
 	# hive is going to need an hive database and user.
 	exec { "hive_mysql_create_database":
 		command => "/usr/bin/mysql -e \"CREATE DATABASE $hive_db_name; USE $hive_db_name; SOURCE /usr/lib/hive/scripts/metastore/upgrade/mysql/hive-schema-0.8.0.mysql.sql;\"",
 		unless  => "/usr/bin/mysql -e 'SHOW DATABASES' | /bin/grep -q $hive_db_name",
 		user    => "root",
 	}
+
+	exec { "hive_mysql_create_stats_database":
+		command => "/usr/bin/mysql -e \"CREATE DATABASE $hive_stats_db_name; USE $hive_stats_db_name;\"",
+		unless  => "/usr/bin/mysql -e 'SHOW DATABASES' | /bin/grep -q $hive_stats_db_name",
+		user    => "root",
+	}
+
 	exec { "hive_mysql_create_user":
-		command => "/usr/bin/mysql -e \"CREATE USER '$hive_db_user'@'localhost' IDENTIFIED BY '$hive_db_pass'; CREATE USER '$hive_db_user'@'127.0.0.1' IDENTIFIED BY '$hive_db_pass'; GRANT ALL PRIVILEGES ON $hive_db_name.* TO '$hive_db_user'@'localhost' WITH GRANT OPTION; GRANT ALL PRIVILEGES ON $hive_db_name.* TO '$hive_db_user'@'127.0.0.1' WITH GRANT OPTION; FLUSH PRIVILEGES;\"",
+		command => "/usr/bin/mysql -e \"CREATE USER '$hive_db_user'@'localhost' IDENTIFIED BY '$hive_db_pass'; CREATE USER '$hive_db_user'@'127.0.0.1' IDENTIFIED BY '$hive_db_pass'; GRANT ALL PRIVILEGES ON $hive_db_name.* TO '$hive_db_user'@'localhost' WITH GRANT OPTION; GRANT ALL PRIVILEGES ON $hive_db_name.* TO '$hive_db_user'@'127.0.0.1' WITH GRANT OPTION; GRANT ALL PRIVILEGES ON $hive_stats_db_name.* TO '$hive_db_user'@'localhost' WITH GRANT OPTION; GRANT ALL PRIVILEGES ON $hive_stats_db_name.* TO '$hive_db_user'@'127.0.0.1' WITH GRANT OPTION; FLUSH PRIVILEGES;\"",
 		unless  => "/usr/bin/mysql -e \"SHOW GRANTS FOR '$hive_db_user'@'127.0.0.1'\" | grep -q \"TO '$hive_db_user'\"",
 		user    => "root",
 	}
