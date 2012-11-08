@@ -212,12 +212,16 @@ class analytics::hive::server {
 	}
 
 	class { "cdh4::hive::server":
-		jdbc_driver   => "com.mysql.jdbc.Driver",
-		jdbc_url      => "jdbc:mysql://localhost:3306/$hive_db_name",
-		jdbc_username => "$hive_db_user",
-		jdbc_password => "$hive_db_pass",
-		require       => [File["/usr/lib/hive/lib/mysql.jar"], Exec["hive_mysql_create_database"], Exec["hive_mysql_create_user"]],
-		subscribe     => [Exec["hive_mysql_create_database"], Exec["hive_mysql_create_user"]]
+		jdbc_driver              => "com.mysql.jdbc.Driver",
+		jdbc_url                 => "jdbc:mysql://localhost:3306/$hive_db_name",
+		jdbc_username            => "$hive_db_user",
+		jdbc_password            => "$hive_db_pass",
+		stats_enabled            => true,
+		stats_dbclass            => "jdbc:mysql",
+		stats_jdbcdriver         => "com.mysql.jdbc.Driver",
+		stats_dbconnectionstring => "jdbc:mysql://localhost:3306/$hive_stats_db_nane?user=$hive_db_user&amp;password=$hive_db_pass",
+		require                  => [File["/usr/lib/hive/lib/mysql.jar"], Exec["hive_mysql_create_database"], Exec["hive_mysql_create_user"]],
+		subscribe                => [Exec["hive_mysql_create_database"], Exec["hive_mysql_create_user"]]
 	}
 }
 
