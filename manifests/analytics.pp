@@ -66,7 +66,7 @@ class role::analytics::worker($datanode_mounts) inherits role::analytics {
 	# hadoop config for datanodes
 	class { "analytics::hadoop::config":
 		require => Class["cloudera::apt_source"],
-		hadoop_mounts => $datanode_mounts,
+		datanode_mounts => $datanode_mounts,
 	}
 
 	# hadoop metrics is common to all nodes
