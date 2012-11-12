@@ -13,7 +13,7 @@ node /^analytics10(0[2-9]|10)/ {
 	
 	$hadoop_data_directory    = "$hadoop_base_directory/data"
 	class { "role::analytics::worker": 
-		hadoop_mounts => [
+		datanode_mounts => [
 			"$hadoop_data_directory/e",
 			"$hadoop_data_directory/f",
 			"$hadoop_data_directory/g",
@@ -32,7 +32,7 @@ node /^analytics10(1[0-9]|20)/ {
 	
 	$hadoop_data_directory    = "$hadoop_base_directory/data"
 	class { "role::analytics::worker": 
-		hadoop_mounts => [
+		datanode_mounts => [
 			"$hadoop_data_directory/c",
 			"$hadoop_data_directory/d",
 			"$hadoop_data_directory/e",

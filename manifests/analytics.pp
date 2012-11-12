@@ -21,11 +21,10 @@ class role::analytics {
 
 
 
-class role::analytics::master($hadoop_mounts) inherits role::analytics {
+class role::analytics::master inherits role::analytics {
 	# hadoop config for namenode
 	class { "analytics::hadoop::config":
 		require => Class["cloudera::apt_source"],
-		hadoop_mounts => undef,
 	}
 
 	# hadoop metrics is common to all nodes
@@ -63,11 +62,11 @@ class role::analytics::master($hadoop_mounts) inherits role::analytics {
 	}
 }
 
-class role::analytics::worker($hadoop_mounts) inherits role::analytics {
+class role::analytics::worker($datanode_mounts) inherits role::analytics {
 	# hadoop config for datanodes
 	class { "analytics::hadoop::config":
 		require => Class["cloudera::apt_source"],
-		hadoop_mounts => $hadoop_mounts,
+		hadoop_mounts => $datanode_mounts,
 	}
 
 	# hadoop metrics is common to all nodes
@@ -97,14 +96,14 @@ class role::analytics::kafka inherits role::analytics {
 
 
 
-class analytics::hadoop::config($hadoop_mounts) {
+class analytics::hadoop::config($datanode_mounts) {
 	$namenode_hostname        = "analytics1001.wikimedia.org"
 	$hadoop_base_directory    = "/var/lib/hadoop"
 	$hadoop_name_directory    = "$hadoop_base_directory/name"
 
 	class { "cdh4::hadoop::config":
 		namenode_hostname    => $namenode_hostname,
-		dfs_data_dir_mounts  => $hadoop_mounts,
+		datanode_mounts      => $datanode_mounts,
 		dfs_name_dir         => [$hadoop_name_directory],
 		dfs_block_size       => 268435456,  # 256 MB
 		map_tasks_maximum    => ($processorcount - 2) / 2,
