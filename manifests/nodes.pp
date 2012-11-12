@@ -5,14 +5,46 @@ node analytics1001 {
 }
 
 
-# install CDH4 on 20 nodes:
-# analytics1002-1022
-node /^analytics10(0[2-9]|1[0-9]|2[0-2])/ {
+# analytics1002-1010
+node /^analytics10(0[2-9]|10)/ {
 	# analytics nodes don't have access to internet.  
 	# set this proxy as default for testing.
 	Exec { environment => 'http_proxy=http://brewster.wikimedia.org:8080' }
 	
-	include role::analytics::worker
+	$hadoop_data_directory    = "$hadoop_base_directory/data"
+	class { "role::analytics::worker": 
+		hadoop_mounts => [
+			"$hadoop_data_directory/e",
+			"$hadoop_data_directory/f",
+			"$hadoop_data_directory/g",
+			"$hadoop_data_directory/h",
+			"$hadoop_data_directory/i",
+			"$hadoop_data_directory/j",
+		],
+	}
+}
+
+# analytics1011-1020
+node /^analytics10(1[0-9]|20)/ {
+	# analytics nodes don't have access to internet.  
+	# set this proxy as default for testing.
+	Exec { environment => 'http_proxy=http://brewster.wikimedia.org:8080' }
+	
+	$hadoop_data_directory    = "$hadoop_base_directory/data"
+	class { "role::analytics::worker": 
+		hadoop_mounts => [
+			"$hadoop_data_directory/c",
+			"$hadoop_data_directory/d",
+			"$hadoop_data_directory/e",
+			"$hadoop_data_directory/f",
+			"$hadoop_data_directory/g",
+			"$hadoop_data_directory/h",
+			"$hadoop_data_directory/i",
+			"$hadoop_data_directory/j",
+			"$hadoop_data_directory/k",
+			"$hadoop_data_directory/l",
+		],
+	}
 }
 
 # analytics1023, analytics1024 and anlytics1025 are Zookeeper Servers

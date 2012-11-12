@@ -7,16 +7,6 @@ class role::analytics {
 		require => Class["cloudera::apt_source"],
 	}
 
-	# hadoop config is common to all nodes
-	class { "analytics::hadoop::config":
-		require => Class["cloudera::apt_source"]
-	}
-
-	# hadoop metrics is common to all nodes
-	class { "analytics::hadoop::metrics":
-		require => Class["analytics::hadoop::config"],
-	}
-
 	# zookeeper config is common to all nodes
 	class { "analytics::zookeeper::config":
 		require => Class["cloudera::apt_source"]
@@ -31,7 +21,20 @@ class role::analytics {
 
 
 
-class role::analytics::master inherits role::analytics {
+class role::analytics::master($hadoop_mounts) inherits role::analytics {
+	# hadoop config for namenode
+	class { "analytics::hadoop::config":
+		require => Class["cloudera::apt_source"],
+		hadoop_mounts => undef,
+	}
+
+	# hadoop metrics is common to all nodes
+	class { "analytics::hadoop::metrics":
+		require => Class["analytics::hadoop::config"],
+	}
+	
+	
+	
 	# hadoop master (namenode, etc.)
 	include cdh4::hadoop::master
 	# oozier server
@@ -60,7 +63,18 @@ class role::analytics::master inherits role::analytics {
 	}
 }
 
-class role::analytics::worker inherits role::analytics {
+class role::analytics::worker($hadoop_mounts) inherits role::analytics {
+	# hadoop config for datanodes
+	class { "analytics::hadoop::config":
+		require => Class["cloudera::apt_source"],
+		hadoop_mounts => $hadoop_mounts,
+	}
+
+	# hadoop metrics is common to all nodes
+	class { "analytics::hadoop::metrics":
+		require => Class["analytics::hadoop::config"],
+	}
+
 	# hadoop worker (datanode, etc.)
 	include cdh4::hadoop::worker
 }
@@ -83,20 +97,10 @@ class role::analytics::kafka inherits role::analytics {
 
 
 
-class analytics::hadoop::config {
+class analytics::hadoop::config($hadoop_mounts) {
 	$namenode_hostname        = "analytics1001.wikimedia.org"
 	$hadoop_base_directory    = "/var/lib/hadoop"
 	$hadoop_name_directory    = "$hadoop_base_directory/name"
-	$hadoop_data_directory    = "$hadoop_base_directory/data"
-	
-	$hadoop_mounts = [
-		"$hadoop_data_directory/e",
-		"$hadoop_data_directory/f",
-		"$hadoop_data_directory/g",
-		"$hadoop_data_directory/h",
-		"$hadoop_data_directory/i",
-		"$hadoop_data_directory/j",
-	]
 
 	class { "cdh4::hadoop::config":
 		namenode_hostname    => $namenode_hostname,
@@ -154,7 +158,7 @@ class analytics::oozie::server {
 	# Change it to MEDIUMTEXT.
 	exec { "oozie_alter_WF_JOBS":
 		command => "/usr/bin/mysql -e 'ALTER TABLE oozie.WF_JOBS CHANGE proto_action_conf proto_action_conf MEDIUMTEXT;'",
-		unless  => "/usr/bin/mysql -e 'SHOW CREATE TABLE oozie.WF_JOBS\G' | grep proto_action_conf | grep -qi mediumtext",
+		unless  => "/usr/bin/mysql -e 'SHOW CREATE TABLE oozie.WF_JOBS\\G' | grep proto_action_conf | grep -qi mediumtext",
 		user    => "root",
 		require => Exec["oozie_mysql_create_database"],
 	}
