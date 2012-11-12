@@ -1,15 +1,16 @@
 class role::analytics {
 	# TODO, remove apt_source when we go to production
 	include analytics_temp
+	include cdh4::apt_source
 
 	# install common cdh4 packages and config
 	class { "cdh4":
-		require => Class["cloudera::apt_source"],
+		require => Class["cdh4::apt_source"],
 	}
 
 	# zookeeper config is common to all nodes
 	class { "analytics::zookeeper::config":
-		require => Class["cloudera::apt_source"]
+		require => Class["cdh4::apt_source"]
 	}
 	# 
 	# # kafka client and config is common to all nodes
@@ -24,7 +25,7 @@ class role::analytics {
 class role::analytics::master inherits role::analytics {
 	# hadoop config for namenode
 	class { "analytics::hadoop::config":
-		require => Class["cloudera::apt_source"],
+		require => Class["cdh4::apt_source"],
 	}
 
 	# hadoop metrics is common to all nodes
@@ -65,7 +66,7 @@ class role::analytics::master inherits role::analytics {
 class role::analytics::worker($datanode_mounts) inherits role::analytics {
 	# hadoop config for datanodes
 	class { "analytics::hadoop::config":
-		require => Class["cloudera::apt_source"],
+		require => Class["cdh4::apt_source"],
 		datanode_mounts => $datanode_mounts,
 	}
 

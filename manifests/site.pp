@@ -1,7 +1,6 @@
 import "nodes.pp"
 import "accounts.pp"
 import "analytics.pp"
-import "cloudera_apt.pp"
 
 # this class does things that ops production
 # usually does, or that we will not need
@@ -25,10 +24,7 @@ class analytics_temp {
 		returns => [ 0, 100 ],
 	}
 
-	package { ["curl", "dstat"]: ensure => "installed", before => Class["cloudera::apt_source"] }
-	include cloudera::apt_source
-	
-	
+	package { ["curl", "dstat"]: ensure => "installed", before => Class["cdh4::apt_source"] }	
 
 	file { "/etc/profile.d/analytics.sh":
 		content => '
