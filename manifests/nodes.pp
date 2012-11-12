@@ -11,7 +11,7 @@ node /^analytics10(0[2-9]|10)/ {
 	# set this proxy as default for testing.
 	Exec { environment => 'http_proxy=http://brewster.wikimedia.org:8080' }
 	
-	$hadoop_data_directory    = "$hadoop_base_directory/data"
+	$hadoop_data_directory    = "/var/lib/hadoop/data"
 	class { "role::analytics::worker": 
 		datanode_mounts => [
 			"$hadoop_data_directory/e",
@@ -30,7 +30,7 @@ node /^analytics10(1[0-9]|20)/ {
 	# set this proxy as default for testing.
 	Exec { environment => 'http_proxy=http://brewster.wikimedia.org:8080' }
 	
-	$hadoop_data_directory    = "$hadoop_base_directory/data"
+	$hadoop_data_directory    = "/var/lib/hadoop/data"
 	class { "role::analytics::worker": 
 		datanode_mounts => [
 			"$hadoop_data_directory/c",
