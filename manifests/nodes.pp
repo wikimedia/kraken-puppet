@@ -47,15 +47,14 @@ node /^analytics10(1[0-9]|20)/ {
 	}
 }
 
+# analytics1021 and analytics1022 are Kafka Brokers
+node analytics1021, analytics1022 {
+	include role::analytics::kafka
+}
+
 # analytics1023, analytics1024 and anlytics1025 are Zookeeper Servers
 node analytics1023,analytics1024,analytics1025 {
 	include role::analytics::zookeeper
-}
-
-
-#  analytics1027 is (temporarily) a kafka servers.
-node analytics1027 {
-	include role::analytics::kafka
 }
 
 
