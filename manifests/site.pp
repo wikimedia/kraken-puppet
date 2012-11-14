@@ -38,11 +38,14 @@ export HADOOP_MAPRED_HOME=/usr/lib/hadoop-mapreduce',
 	 
 	include kraken_accounts
 	
-# 	file {
-# 		"/etc/apt/sources.list.d/kraken.list":
-# 			content => "deb http://analytics1001.wikimedia.org/apt binary/
-# deb-src http://analytics1001.wikimedia.org/apt source/",
-# 			mode => 0444,
-# 			notify => Exec["/usr/bin/apt-get update"],
-# 	}
+	file {
+		"/etc/apt/sources.list.d/kraken.list":
+			content => "deb http://analytics1001.wikimedia.org/apt binary/
+deb-src http://analytics1001.wikimedia.org/apt source/",
+			mode => 0444,
+			notify => Exec["/usr/bin/apt-get update"],
+	}
+
+	
 }
+
