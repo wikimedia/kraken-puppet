@@ -4,3 +4,6 @@
 [submodule "modules/kafka"]
 	path = modules/kafka
 	url = git://github.com/wmf-analytics/puppet-kafka.git
+[submodule "modules/jmxtrans"]
+	path = modules/jmxtrans
+	url = git://github.com/ottomata/puppet-jmxtrans.git
