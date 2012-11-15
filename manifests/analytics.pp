@@ -93,6 +93,9 @@ class role::analytics::kafka inherits role::analytics {
 		zookeeper_hosts => $analytics::zookeeper::config::zookeeper_hosts,
 	}
 	include kafka::server
+
+	# ( in monitoring.pp )
+	include kafka::jmxtrans
 }
 
 
