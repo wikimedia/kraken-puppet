@@ -5,7 +5,7 @@ class analytics::jmxtrans {
 
 	# set the default output writer to ganglia.
 	Jmxtrans::Metrics {
-		ganglia => "239.192.1.32:8649",	
+		ganglia => "239.192.1.32:8649"
 	}
 }
 
