@@ -5,7 +5,7 @@ node analytics1001 {
 }
 
 
-# analytics1002-1010
+# analytics1002-1009
 node /^analytics10(0[2-9]|10)/ {
 	# analytics nodes don't have access to internet.  
 	# set this proxy as default for testing.
