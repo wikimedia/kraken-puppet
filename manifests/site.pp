@@ -1,7 +1,8 @@
 import "nodes.pp"
 import "accounts.pp"
-import "analytics.pp"
 import "monitoring.pp"
+import "role/*.pp"
+import "analytics/*.pp"
 
 
 

@@ -1,5 +1,6 @@
-class analytics::jmxtrans {
-	# set up jmx monitoring for kafka.
+# TODO: move monitoring service functions into specific service classes.
+
+class analytics::monitoring::jmxtrans {
 	# include jmxtrans
 	include jmxtrans
 
@@ -9,7 +10,9 @@ class analytics::jmxtrans {
 	}
 }
 
-class kafka::jmxtrans inherits analytics::jmxtrans {
+# TODO: does this need to inherit?
+# set up jmx monitoring for kafka.
+class analytics::monitoring::kafka inherits analytics::monitoring::jmxtrans {
 	# query kafka for jmx metrics
 	jmxtrans::metrics { "kafka-$hostname":
 		jmx     => "$fqdn:9999",
