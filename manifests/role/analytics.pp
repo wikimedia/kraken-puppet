@@ -46,11 +46,11 @@ class role::analytics::hadoop::worker inherits role::analytics::hadoop {
 }
 
 
-class role::analytics::kafka {
+class role::analytics::kafka inherits role::analytics {
 	include analytics::kafka::server
 }
 
-class role::analytics::zookeeper {
+class role::analytics::zookeeper inherits role::analytics {
 	# zookeeper server
 	include analytics::zookeeper::server
 }

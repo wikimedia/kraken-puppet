@@ -1,4 +1,6 @@
 class analytics::zookeeper::config {
+	include cdh4::zookeeper
+	
 	$zookeeper_hosts = [
 		"analytics1023.eqiad.wmnet",
 		"analytics1024.eqiad.wmnet",
@@ -7,11 +9,15 @@ class analytics::zookeeper::config {
 
 	class { "cdh4::zookeeper::config":
 		zookeeper_hosts => $zookeeper_hosts,
+		require         => Class["analytics::zookeeper"],
 	}
 }
 
 
-class analytics::zookeeper::server {
-	require analytics::zookeeper::config
-	include cdh4::zookeeper::server
+class analytics::zookeeper::server  {
+	include analytics::zookeeper::config
+
+	class { "cdh4::zookeeper::server":
+		require => Class["analytics::zookeeper::config"]
+	}
 }
