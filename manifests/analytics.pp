@@ -143,7 +143,7 @@ class role::analytics::kafka inherits role::analytics {
 
 
 class analytics::hadoop::config($datanode_mounts = []) {
-	$namenode_hostname        = "analytics1010.wikimedia.org"
+	$namenode_hostname        = "analytics1010.eqiad.wmnet"
 	$hadoop_name_directory    = "/var/lib/hadoop/name"
 
 	class { "cdh4::hadoop::config":
