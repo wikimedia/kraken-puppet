@@ -44,17 +44,6 @@ class role::analytics::hadoop::master inherits role::analytics::hadoop {
 
 
 class role::analytics::hadoop::worker inherits role::analytics::hadoop {
-	# hadoop config for datanodes
-	class { "analytics::hadoop::config":
-		require => Class["cdh4::apt_source"],
-		datanode_mounts => $datanode_mounts,
-	}
-
-	# hadoop metrics is common to all nodes
-	class { "analytics::hadoop::metrics":
-		require => Class["analytics::hadoop::config"],
-	}
-
 	# hadoop worker (datanode, etc.)
 	include cdh4::hadoop::worker
 }
