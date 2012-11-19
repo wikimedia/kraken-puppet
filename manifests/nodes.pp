@@ -32,7 +32,7 @@ node /^analytics10(0[2-9]|10)/ {
 }
 
 # analytics1011-1020
-node /^analytics10(1[0-9]|20)/ {
+node /^analytics10(1[1-9]|20)/ {
 	# analytics nodes don't have access to internet.  
 	# set this proxy as default for testing.
 	Exec { environment => 'http_proxy=http://brewster.wikimedia.org:8080' }
