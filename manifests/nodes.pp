@@ -1,7 +1,14 @@
 
+# an01 was previous hadoop master.
+# Namenode has moved to an10, but extra service remain for now.
+node analytics1001 {
+	include role::analytics::temp::extra_services
+}
+
 # analytics1010 is Hadoop Master (i.e NameNode, JobTracker, and ResourceManager)
 node analytics1010 {
-	include role::analytics::master
+	# include role::analytics::master
+	include role::analytics::temp::namenode
 }
 
 
