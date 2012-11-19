@@ -12,16 +12,13 @@
 #
 
 
-class role::analytics::frontend {
-	# hadoop config for namenode
-	class { "analytics::hadoop::config":
-		require => Class["cdh4::apt_source"],
-	}
-
+class role::analytics::frontend inherits role::analytics {
 	# oozier server
 	include analytics::oozie::server
 	# hive metastore and hive server
 	include analytics::hive::server
+	# hue server
+	include analytics::hue
 }
 
 
