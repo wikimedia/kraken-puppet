@@ -12,24 +12,24 @@ node analytics1010 {
 }
 
 
-# analytics1002-1009
-node /^analytics10(0[2-9]|10)/ {
-	# analytics nodes don't have access to internet.  
-	# set this proxy as default for testing.
-	Exec { environment => 'http_proxy=http://brewster.wikimedia.org:8080' }
-	
-	# $hadoop_data_directory    = "/var/lib/hadoop/data"
-	# class { "role::analytics::worker": 
-	# 	datanode_mounts => [
-	# 		"$hadoop_data_directory/e",
-	# 		"$hadoop_data_directory/f",
-	# 		"$hadoop_data_directory/g",
-	# 		"$hadoop_data_directory/h",
-	# 		"$hadoop_data_directory/i",
-	# 		"$hadoop_data_directory/j",
-	# 	],
-	# }
-}
+# # analytics1002-1009
+# node /^analytics10(0[2-9])/ {
+# 	# analytics nodes don't have access to internet.  
+# 	# set this proxy as default for testing.
+# 	Exec { environment => 'http_proxy=http://brewster.wikimedia.org:8080' }
+# 	
+# 	# $hadoop_data_directory    = "/var/lib/hadoop/data"
+# 	# class { "role::analytics::worker": 
+# 	# 	datanode_mounts => [
+# 	# 		"$hadoop_data_directory/e",
+# 	# 		"$hadoop_data_directory/f",
+# 	# 		"$hadoop_data_directory/g",
+# 	# 		"$hadoop_data_directory/h",
+# 	# 		"$hadoop_data_directory/i",
+# 	# 		"$hadoop_data_directory/j",
+# 	# 	],
+# 	# }
+# }
 
 # analytics1011-1020
 node /^analytics10(1[1-9]|20)/ {
