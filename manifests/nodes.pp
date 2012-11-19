@@ -1,6 +1,6 @@
 
-# analytics1001 is Hadoop Master (i.e NameNode, JobTracker, and ResourceManager)
-node analytics1001 {
+# analytics1010 is Hadoop Master (i.e NameNode, JobTracker, and ResourceManager)
+node analytics1010 {
 	include role::analytics::master
 }
 
