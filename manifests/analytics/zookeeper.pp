@@ -9,7 +9,7 @@ class analytics::zookeeper::config {
 
 	class { "cdh4::zookeeper::config":
 		zookeeper_hosts => $zookeeper_hosts,
-		require         => Class["analytics::zookeeper"],
+		require         => Class["cdh4::zookeeper"],
 	}
 }
 
