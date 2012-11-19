@@ -34,6 +34,18 @@ class role::analytics::temp::namenode inherits role::analytics {
 	
 	# hadoop master (namenode, etc.)
 	include cdh4::hadoop::master
+	
+	# Hadoop namenode web interface is missing a css file.
+	# Put it in the proper place.
+	# See: https://issues.apache.org/jira/browse/HDFS-3578
+	file { "/usr/lib/hadoop-hdfs/webapps/static":
+		ensure  => "directory",
+		require => Class["cdh4::hadoop::master"],
+	}
+	file { "/usr/lib/hadoop-hdfs/webapps/static/hadoop.css":
+		source  => "file:///usr/lib/hadoop-0.20-mapreduce/webapps/static/hadoop.css",
+		require => File["/usr/lib/hadoop-hdfs/webapps/static"],
+	}
 }
 
 
@@ -53,19 +65,6 @@ class role::analytics::temp::extra_services inherits role::analytics {
 		# TODO:  Change secret_key and put it in private puppet repo.
 		secret_key => "MQBvbk9fk9u1hSr7S13auZyYbRAPK0BbSr6k0NLokTNswv1wNU4v90nUhZE3",
 		require    => Class["cdh4::oozie::server"],
-	}
-
-
-	# Hadoop namenode web interface is missing a css file.
-	# Put it in the proper place.
-	# See: https://issues.apache.org/jira/browse/HDFS-3578
-	file { "/usr/lib/hadoop-hdfs/webapps/static":
-		ensure  => "directory",
-		require => Class["cdh4::hadoop::master"],
-	}
-	file { "/usr/lib/hadoop-hdfs/webapps/static/hadoop.css":
-		source  => "file:///usr/lib/hadoop-0.20-mapreduce/webapps/static/hadoop.css",
-		require => File["/usr/lib/hadoop-hdfs/webapps/static"],
 	}
 }
 
