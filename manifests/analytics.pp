@@ -38,6 +38,11 @@ class role::analytics::temp::namenode inherits role::analytics {
 
 
 class role::analytics::temp::extra_services inherits role::analytics {
+	# hadoop config for namenode
+	class { "analytics::hadoop::config":
+		require => Class["cdh4::apt_source"],
+	}
+
 	# oozier server
 	include analytics::oozie::server
 	# hive metastore and hive server
