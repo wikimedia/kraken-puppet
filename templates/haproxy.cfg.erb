@@ -28,6 +28,9 @@ userlist wmf-analytics
 
 frontend kraken
   bind 0.0.0.0:80
+  
+  # Auth ACLs
+  acl auth_ok           http_auth(wmf-analytics)
 
   # HTTP Host based ACLs
   acl host_analytics    hdr_beg(host)    -i analytics.
