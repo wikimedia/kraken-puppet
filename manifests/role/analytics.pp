@@ -4,6 +4,7 @@
 # This file contains base classes and final includable classes.
 # The includable role classes are:
 #
+#   role::analytics::public           - Machines with public facing IP addresses act as proxies to backend services.
 #   role::analytics::frontend         - Front end Kraken interfaces (hue, oozie, etc.)
 #   role::analytics::hadoop::master   - Hadoop master services (namenode, resourcemanager, jobhistory, etc.)
 #   role::analytics::hadoop::worker   - Hadoop worker services (datanode, nodemanager)
@@ -11,9 +12,12 @@
 #   role::analytics::zookeeper        - Zookeeper Server
 #
 
+class role::analytics::public inherits role::analytics {
+	include analytics::proxy
+}
 
 class role::analytics::frontend inherits role::analytics {
-	# oozier server
+	# oozie server
 	include analytics::oozie::server
 	# hive metastore and hive server
 	include analytics::hive::server

@@ -15,7 +15,7 @@ class analytics::hadoop::config {
 		"$hadoop_data_directory/k",
 		"$hadoop_data_directory/l"
 	]
-	
+
 	class { "cdh4::hadoop::config":
 		namenode_hostname    => $namenode_hostname,
 		datanode_mounts      => $datanode_mounts,
