@@ -58,6 +58,8 @@ frontend kraken
   use_backend   history   if host_history
   use_backend   hue       if host_hue
   use_backend   oozie     if host_oozie
+  
+  default_backend localhost_81
 
 
 
@@ -80,3 +82,6 @@ backend hue
 
 backend oozie
   server oozie_server <%= oozie_hostname %>:11000
+
+backend localhost_81
+  server localhost localhost:81
