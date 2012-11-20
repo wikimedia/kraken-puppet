@@ -17,7 +17,7 @@ class analytics::proxy {
 	
 	service { "haproxy":
 		ensure    => running,
-		enabled   => true,
+		enable    => true,
 		subscribe => File["/etc/haproxy/haproxy.cfg"],
 	}
 }
