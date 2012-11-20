@@ -24,7 +24,8 @@ defaults
 
 
 userlist wmf-analytics
-  user wmf-analytics password $6$k6$kyx9DDXmf5xWvECQYqwRDfwgniFIx.BJIvjiXuf8DHJkPh0pCPckhlGnnHKs9pNthCZ9UyxVQzYq9dbQZNhS6/
+  user wmf-analytics  password  $6$k6$kyx9DDXmf5xWvECQYqwRDfwgniFIx.BJIvjiXuf8DHJkPh0pCPckhlGnnHKs9pNthCZ9UyxVQzYq9dbQZNhS6/
+  user louisdang      password  $6$k6$j/f8G9CmFjrwWiflr8O6NXpgadA/kA5FSGe0noZNu.JcMfmpeoSGyglYBpfn/7U6Uz10o.REWqouoyxqZ6FuW1
 
 frontend kraken
   bind 0.0.0.0:80
@@ -84,4 +85,4 @@ backend oozie
   server oozie_server <%= oozie_hostname %>:11000
 
 backend localhost_81
-  server localhost localhost:81
+  server localhost 127.0.0.1:81
