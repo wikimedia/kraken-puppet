@@ -43,13 +43,14 @@ frontend kraken
 
   # Whitelisted Network/IP ACLs
   acl src_wmf_office    src 216.38.130.0/24
-  acl src_diederik      src 70.28.63.126 
+  acl src_diederik      src 70.28.63.126
+  acl src_dsc           src 71.198.62.242
 
   # Only allow proxying if the request
   # is coming from a whitelisted network or IP, 
   # the HTTP auth test passes, or if
   # the request is to analytics.wikimedia.org.
-  http-request auth unless auth_ok or host_analytics or src_wmf_office or src_diederik
+  http-request auth unless auth_ok or host_analytics or src_wmf_office or src_diederik or src_dschoon
 
   # Use appropriate server backend based
   # on matched HTTP Host ACL
