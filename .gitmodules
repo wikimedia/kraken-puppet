@@ -7,3 +7,6 @@
 [submodule "modules/jmxtrans"]
 	path = modules/jmxtrans
 	url = git://github.com/wmf-analytics/puppet-jmxtrans.git 
+[submodule "modules/storm"]
+	path = modules/storm
+	url = git://github.com/wmf-analytics/puppet-storm.git
