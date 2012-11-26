@@ -17,12 +17,14 @@ class role::analytics::public inherits role::analytics {
 }
 
 class role::analytics::frontend inherits role::analytics {
-	# oozie server
+	# Oozie server
 	include analytics::oozie::server
-	# hive metastore and hive server
+	# Hive metastore and hive server
 	include analytics::hive::server
-	# hue server
+	# Hue server
 	include analytics::hue
+	# Storm UI server
+	include analytics::storm::ui
 }
 
 
@@ -59,7 +61,13 @@ class role::analytics::zookeeper inherits role::analytics {
 	include analytics::zookeeper::server
 }
 
-
+# Storm roles
+class role::analytics::storm::master inherits role::analytics {
+	include analytics::storm::master
+}
+class role::analytics::storm::worker inherits role::analytics {
+	include analytics::storm::worker
+}
 
 # == Base Role Classes ==
 
@@ -85,6 +93,12 @@ class role::analytics {
 	# 
 	# # kafka client and config is common to all nodes
 	# class { "analytics::kafka::client":
+	# 	require => File["/etc/apt/sources.list.d/kraken.list"],
+	# }
+ 
+	#
+	# # storm client and config is common to all nodes
+	# class { "analytics::storm::client":
 	# 	require => File["/etc/apt/sources.list.d/kraken.list"],
 	# }
 }
