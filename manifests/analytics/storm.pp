@@ -38,7 +38,7 @@ class analytics::storm {
 
 	$nimbus_host = "analytics1002.eqiad.wmnet"
 	$zookeeper_hosts = $analytics::zookeeper::config::zookeeper_hosts
-	class { "storm":
+	class { "::storm":
 		nimbus_host     => $nimbus_host,
 		zookeeper_hosts => $zookeeper_hosts,
 		ui_port         => 6999,
