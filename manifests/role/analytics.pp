@@ -10,6 +10,8 @@
 #   role::analytics::hadoop::worker   - Hadoop worker services (datanode, nodemanager)
 #   role::analytics::kafka            - Kafka Broker
 #   role::analytics::zookeeper        - Zookeeper Server
+#   role::analytics::storm::master    - Storm Nimubs Server
+#   role::analytics::storm::worker    - Storm Supervisor Server
 #
 
 class role::analytics::public inherits role::analytics {
