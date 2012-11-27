@@ -16,9 +16,12 @@
 
 class role::analytics::public inherits role::analytics {
 	include analytics::proxy
+	include analytics::misc::web::index
 }
 
 class role::analytics::frontend inherits role::analytics {
+	include analytics::misc::web::index
+
 	# Oozie server
 	include analytics::oozie::server
 	# Hive metastore and hive server
