@@ -36,12 +36,13 @@ class analytics::storm::client inherits analytics::storm {
 class analytics::storm {
 	require analytics::zookeeper::config
 
-	$nimbus_host = "analytics1002.eqiad.wmnet"
+	$nimbus_host     = "analytics1002.eqiad.wmnet"
 	$zookeeper_hosts = $analytics::zookeeper::config::zookeeper_hosts
+	$ui_port         = 6999
 	class { "::storm":
 		nimbus_host     => $nimbus_host,
 		zookeeper_hosts => $zookeeper_hosts,
-		ui_port         => 6999,
+		ui_port         => $ui_port,
 		# use all but 2 processors on each supervisor worker machine
 		worker_count    => $processorcount - 2,
 	}

@@ -7,6 +7,8 @@ class analytics::proxy {
 	$frontend_hostname = "analytics1027.eqiad.wmnet"
 	$hue_hostname      = $frontend_hostname
 	$oozie_hostname    = $frontend_hostname
+	$storm_hostname    = $analytics::storm::nimbus_host
+	$storm_port        = $analytics::storm::ui_port
 
 	package { "haproxy": ensure => "installed" }
 
