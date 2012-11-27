@@ -34,6 +34,8 @@ class analytics::storm::client inherits analytics::storm {
 #
 # Installs Storm and generic Storm configs.
 class analytics::storm {
+	require analytics::zookeeper::config
+
 	$nimbus_host = "analytics1002.eqiad.wmnet"
 	$zookeeper_hosts = $analytics::zookeeper::config::zookeeper_hosts
 	class { "storm":
