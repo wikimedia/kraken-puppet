@@ -25,8 +25,6 @@ class role::analytics::frontend inherits role::analytics {
 	include analytics::hive::server
 	# Hue server
 	include analytics::hue
-	# Storm UI server
-	include analytics::storm::frontend
 }
 
 
@@ -68,6 +66,8 @@ class role::analytics::storm::master inherits role::analytics {
 	# need to fully qualify class name since it matches
 	# the role name.
 	include ::analytics::storm::master
+	# Storm UI server
+	include ::analytics::storm::frontend
 }
 class role::analytics::storm::worker inherits role::analytics {
 	# need to fully qualify class name since it matches
