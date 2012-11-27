@@ -3,7 +3,7 @@
 # internally hosted web services.
 #
 class analytics::proxy {
-	require analytics::hadoop::config, analytyics::storm
+	require analytics::hadoop::config, analytics::storm
 
 	$namenode_hostname = $analytics::hadoop::config::namenode_hostname
 	$frontend_hostname = "analytics1027.eqiad.wmnet"
