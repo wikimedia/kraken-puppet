@@ -65,10 +65,14 @@ class role::analytics::zookeeper inherits role::analytics {
 
 # Storm roles
 class role::analytics::storm::master inherits role::analytics {
-	include analytics::storm::master
+	# need to fully qualify class name since it matches
+	# the role name.
+	include ::analytics::storm::master
 }
 class role::analytics::storm::worker inherits role::analytics {
-	include analytics::storm::worker
+	# need to fully qualify class name since it matches
+	# the role name.
+	include ::analytics::storm::worker
 }
 
 # == Base Role Classes ==
