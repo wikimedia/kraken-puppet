@@ -48,6 +48,12 @@ frontend kraken
   acl src_diederik      src 70.28.63.126
   acl src_dsc           src 71.198.62.242
 
+  # Kraken Apt repository
+  acl host_analytics1001 hdr_beg(host)   -i analytics1001.
+  acl path_apt           path_beg        -i /apt
+
+  # Allow public access to the Kraken Apt repository
+  http-request allow if host_analytics1001 path_apt
 
   # Only allow proxying if the request
   # is coming from a whitelisted network or IP, 
