@@ -26,7 +26,7 @@ class role::analytics::frontend inherits role::analytics {
 	# Hue server
 	include analytics::hue
 	# Storm UI server
-	include analytics::storm::ui
+	include analytics::storm::frontend
 }
 
 

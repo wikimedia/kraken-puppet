@@ -14,11 +14,11 @@ class analytics::storm::worker inherits analytics::storm {
   include storm::supervisor
 }
 
-# == Class analytics::storm::ui
+# == Class analytics::storm::frontend
 #
 # Inherits from analytics::storm to get installtion and config,
 # and then configures a Storm UI server and ensures that it is running.
-class analytics::storm::ui inherits analytics::storm {
+class analytics::storm::frontend inherits analytics::storm {
   include storm::ui
 }
 
