@@ -18,7 +18,7 @@ class analytics::storm::worker inherits analytics::storm {
 #
 # Inherits from analytics::storm to get installtion and config,
 # and then configures a Storm UI server and ensures that it is running.
-class analytics::storm::ui inherits analtyics::storm {
+class analytics::storm::ui inherits analytics::storm {
   include storm::ui
 }
 
