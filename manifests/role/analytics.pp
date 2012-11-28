@@ -15,65 +15,61 @@
 #
 
 class role::analytics::public inherits role::analytics {
-	include analytics::proxy
-	include analytics::misc::web::index
+	include kraken::proxy
+	include kraken::misc::web::index
 }
 
 class role::analytics::frontend inherits role::analytics {
-	include analytics::misc::web::index
+	include kraken::misc::web::index
 
 	# Oozie server
-	include analytics::oozie::server
+	include kraken::oozie::server
 	# Hive metastore and hive server
-	include analytics::hive::server
+	include kraken::hive::server
 	# Hue server
-	include analytics::hue
+	include kraken::hue
 }
 
 
 class role::analytics::kafka inherits role::analytics {
-	include analytics::kafka::server
+	include kraken::kafka::server
 }
 
 class role::analytics::zookeeper inherits role::analytics {
 	# zookeeper server
-	include analytics::zookeeper::server
+	include kraken::zookeeper::server
 }
 
 # Storm roles
 class role::analytics::storm::master inherits role::analytics {
-	# need to fully qualify class name since it matches
-	# the role name.
-	include ::analytics::storm::master
+	include kraken::storm::master
 	# Storm UI server
-	include ::analytics::storm::frontend
+	include kraken::storm::frontend
 }
 class role::analytics::storm::worker inherits role::analytics {
-	# need to fully qualify class name
-	# since it matches the role name.
-	include ::analytics::storm::worker
+	include kraken::storm::worker
 }
 
 
-
+# Hadoop roles
 class role::analytics::hadoop::master inherits role::analytics::hadoop {
-	include ::analytics::hadoop::master
+	include kraken::hadoop::master
 }
 
 class role::analytics::hadoop::worker inherits role::analytics::hadoop {
-	include ::analytics::hadoop::worker
+	include kraken::hadoop::worker
 }
 
 # == Base Role Classes ==
 
 class role::analytics {
-	include analytics
+	include kraken
 }
 
 class role::analytics::hadoop inherits role::analytics {
 	# hadoop metrics is common to all hadoop nodes
-	class { "analytics::hadoop::metrics":
-		require => Class["::analytics::hadoop::config"],
+	class { "kraken::hadoop::metrics":
+		require => Class["kraken::hadoop::config"],
 	}
 }
 
