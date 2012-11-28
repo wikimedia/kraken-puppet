@@ -15,7 +15,7 @@ class kraken::proxy {
 	package { "haproxy": ensure => "installed" }
 
 	file { "/etc/haproxy/haproxy.cfg":
-		content => template("haproxy.cfg.erb"),
+		content => template("kraken/haproxy.cfg.erb"),
 		require => Package["haproxy"],
 	}
 	

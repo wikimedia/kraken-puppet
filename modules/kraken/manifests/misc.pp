@@ -9,7 +9,7 @@ class kraken::misc::web::index {
 	$storm_port        = $kraken::storm::ui_port
 	
 	file { "/var/www/index.php":
-		content => template("index.php.erb"),
+		content => template("kraken/index.php.erb"),
 	}
 }
 
