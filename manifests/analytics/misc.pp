@@ -53,10 +53,7 @@ alias pupsign="sudo puppetca --vardir /var/lib/puppet.analytics --ssldir /var/li
 export HADOOP_MAPRED_HOME=/usr/lib/hadoop-mapreduce',
 		mode => 0755,
 	}
-	
-	 
-	include kraken_accounts
-	
+
 	file {
 		"/etc/apt/sources.list.d/kraken.list":
 			content => "deb http://analytics1001.wikimedia.org/apt binary/
