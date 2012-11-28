@@ -1,5 +1,5 @@
 # == Class analytics
-# Base class for all analytics nodes.
+# This class should be included on all analytics nodes.
 class analytics {
 	# TODO: remove apt_source and analytics::misc::temp
 	# when we go to production
