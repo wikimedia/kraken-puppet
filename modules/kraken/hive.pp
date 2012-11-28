@@ -1,6 +1,6 @@
-class analytics::hive::server {
-	require analytics::packages::mysql_java
-	# require analytics::db::mysql
+class kraken::hive::server {
+	require kraken::packages::mysql_java
+	# require kraken::db::mysql
 
 	# symlink the mysql.jar into /var/lib/hive/lib
 	file { "/usr/lib/hive/lib/mysql.jar":

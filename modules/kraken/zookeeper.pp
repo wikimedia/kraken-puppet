@@ -1,4 +1,4 @@
-class analytics::zookeeper::config {
+class kraken::zookeeper::config {
 	include cdh4::zookeeper
 	
 	$zookeeper_hosts = [
@@ -14,10 +14,10 @@ class analytics::zookeeper::config {
 }
 
 
-class analytics::zookeeper::server  {
-	include analytics::zookeeper::config
+class kraken::zookeeper::server  {
+	include kraken::zookeeper::config
 
 	class { "cdh4::zookeeper::server":
-		require => Class["analytics::zookeeper::config"]
+		require => Class["kraken::zookeeper::config"]
 	}
 }

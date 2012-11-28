@@ -1,7 +1,7 @@
 
-# == Class analytics::hadoop::config
+# == Class kraken::hadoop::config
 # Hadoop config common to all analytics nodes.
-class analytics::hadoop::config {
+class kraken::hadoop::config {
 	$namenode_hostname        = "analytics1010.eqiad.wmnet"
 	$hadoop_name_directory    = "/var/lib/hadoop/name"
 
@@ -34,17 +34,17 @@ class analytics::hadoop::config {
 	}
 }
 
-# == Class analytics::hadoop::worker
+# == Class kraken::hadoop::worker
 #
-class analytics::hadoop::worker {
+class kraken::hadoop::worker {
 	# hadoop worker (datanode, etc.)
 	include cdh4::hadoop::worker
 }
 
-# == Class analytics::hadoop::master
+# == Class kraken::hadoop::master
 # Includes cdh4:hadoop::master and 
 # makes sure hadoop UI .css files are in place.
-class analytics::hadoop::master {
+class kraken::hadoop::master {
 	# hadoop master (namenode, etc.)
 	include cdh4::hadoop::master
 
@@ -61,9 +61,9 @@ class analytics::hadoop::master {
 	}
 }
 
-# == Class analytics::hadoop::metrics
+# == Class kraken::hadoop::metrics
 # Includes cdh4::hadoop::metrics using the analytics eqiad ganglia mcast address.
-class analytics::hadoop::metrics {
+class kraken::hadoop::metrics {
 	class { "cdh4::hadoop::metrics":
 		# TODO:  Use analytics ganglia cluster mcast_address from ganglia.pp in production.
 		ganglia_hosts => ["239.192.1.32:8649"],

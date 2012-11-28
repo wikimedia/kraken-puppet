@@ -1,7 +1,7 @@
 
-class analytics::oozie::server {
-	require analytics::packages::mysql_java
-	# require analytics::db::mysql
+class kraken::oozie::server {
+	require kraken::packages::mysql_java
+	# require kraken::db::mysql
 
 	# symlink the mysql.jar into /var/lib/oozie
 	file { "/var/lib/oozie/mysql.jar":

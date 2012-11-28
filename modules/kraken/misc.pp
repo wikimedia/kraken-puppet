@@ -1,12 +1,12 @@
-# == Class analytics::misc::web::index
+# == Class kraken::misc::web::index
 #
-class analytics::misc::web::index {
-	require analytics::hadoop::config, analytics::storm
+class kraken::misc::web::index {
+	require kraken::hadoop::config, kraken::storm
 	
 	$frontend_hostname = "analytics1027.eqiad.wmnet"
-	$namenode_hostname = $analytics::hadoop::config::namenode_hostname
-	$storm_hostname    = $analytics::storm::nimbus_host
-	$storm_port        = $analytics::storm::ui_port
+	$namenode_hostname = $kraken::hadoop::config::namenode_hostname
+	$storm_hostname    = $kraken::storm::nimbus_host
+	$storm_port        = $kraken::storm::ui_port
 	
 	file { "/var/www/index.php":
 		content => template("index.php.erb"),
@@ -24,7 +24,7 @@ class analytics::misc::web::index {
 # this class does things that ops production
 # usually does, or that we will not need
 # in production when we are finished with testing.
-class analytics::misc::temp {
+class kraken::misc::temp {
 	if $hostname != 'analytics1001' {
 		Exec {
 			environment => "http_proxy=http://brewster.wikimedia.org:8080"

@@ -1,16 +1,16 @@
-# == Class analytics::proxy
+# == Class kraken::proxy
 # Uses haproxy to set up a proxy to
 # internally hosted web services.
 #
-class analytics::proxy {
-	require analytics::hadoop::config, analytics::storm
+class kraken::proxy {
+	require kraken::hadoop::config, kraken::storm
 
-	$namenode_hostname = $analytics::hadoop::config::namenode_hostname
+	$namenode_hostname = $kraken::hadoop::config::namenode_hostname
 	$frontend_hostname = "analytics1027.eqiad.wmnet"
 	$hue_hostname      = $frontend_hostname
 	$oozie_hostname    = $frontend_hostname
-	$storm_hostname    = $analytics::storm::nimbus_host
-	$storm_port        = $analytics::storm::ui_port
+	$storm_hostname    = $kraken::storm::nimbus_host
+	$storm_port        = $kraken::storm::ui_port
 
 	package { "haproxy": ensure => "installed" }
 
