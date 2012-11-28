@@ -1,3 +1,6 @@
+
+# == Class analytics::hadoop::config
+# Hadoop config common to all analytics nodes.
 class analytics::hadoop::config {
 	$namenode_hostname        = "analytics1010.eqiad.wmnet"
 	$hadoop_name_directory    = "/var/lib/hadoop/name"
@@ -31,6 +34,35 @@ class analytics::hadoop::config {
 	}
 }
 
+# == Class analytics::hadoop::worker
+#
+class analytics::hadoop::worker {
+	# hadoop worker (datanode, etc.)
+	include cdh4::hadoop::worker
+}
+
+# == Class analytics::hadoop::master
+# Includes cdh4:hadoop::master and 
+# makes sure hadoop UI .css files are in place.
+class analytics::hadoop::master {
+	# hadoop master (namenode, etc.)
+	include cdh4::hadoop::master
+
+	# Hadoop namenode web interface is missing a css file.
+	# Put it in the proper place.
+	# See: https://issues.apache.org/jira/browse/HDFS-3578
+	file { "/usr/lib/hadoop-hdfs/webapps/static":
+		ensure  => "directory",
+		require => Class["cdh4::hadoop::master"],
+	}
+	file { "/usr/lib/hadoop-hdfs/webapps/static/hadoop.css":
+		source  => "file:///usr/lib/hadoop-0.20-mapreduce/webapps/static/hadoop.css",
+		require => File["/usr/lib/hadoop-hdfs/webapps/static"],
+	}
+}
+
+# == Class analytics::hadoop::metrics
+# Includes cdh4::hadoop::metrics using the analytics eqiad ganglia mcast address.
 class analytics::hadoop::metrics {
 	class { "cdh4::hadoop::metrics":
 		# TODO:  Use analytics ganglia cluster mcast_address from ganglia.pp in production.
