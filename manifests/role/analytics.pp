@@ -81,8 +81,9 @@ class role::analytics::storm::worker inherits role::analytics {
 # == Base Role Classes ==
 
 class role::analytics {
-	# TODO, remove apt_source when we go to production
-	include analytics_temp
+	# TODO: remove apt_source and analytics::misc::temp
+	# when we go to production
+	include analytics::misc::temp
 	include cdh4::apt_source
 
 	# install common cdh4 packages and config
