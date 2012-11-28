@@ -15,29 +15,29 @@
 #
 
 class role::analytics::public inherits role::analytics {
-	include ::analytics::proxy
-	include ::analytics::misc::web::index
+	include analytics::proxy
+	include analytics::misc::web::index
 }
 
 class role::analytics::frontend inherits role::analytics {
-	include ::analytics::misc::web::index
+	include analytics::misc::web::index
 
 	# Oozie server
-	include ::analytics::oozie::server
+	include analytics::oozie::server
 	# Hive metastore and hive server
-	include ::analytics::hive::server
+	include analytics::hive::server
 	# Hue server
-	include ::analytics::hue
+	include analytics::hue
 }
 
 
 class role::analytics::kafka inherits role::analytics {
-	include ::analytics::kafka::server
+	include analytics::kafka::server
 }
 
 class role::analytics::zookeeper inherits role::analytics {
 	# zookeeper server
-	include ::analytics::zookeeper::server
+	include analytics::zookeeper::server
 }
 
 # Storm roles
@@ -72,7 +72,7 @@ class role::analytics {
 
 class role::analytics::hadoop inherits role::analytics {
 	# hadoop metrics is common to all hadoop nodes
-	class { "::analytics::hadoop::metrics":
+	class { "analytics::hadoop::metrics":
 		require => Class["::analytics::hadoop::config"],
 	}
 }
