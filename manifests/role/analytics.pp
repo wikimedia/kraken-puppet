@@ -67,7 +67,7 @@ class role::analytics::hadoop::worker inherits role::analytics::hadoop {
 # == Base Role Classes ==
 
 class role::analytics {
-	include ::analytics
+	include analytics
 }
 
 class role::analytics::hadoop inherits role::analytics {
